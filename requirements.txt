@@ -1,0 +1,11 @@
+django
+djangorestframework
+djangorestframework-jwt
+cryptography
+pyjwt
+python-dotenv
+psycopg2
+psycopg2-binary
+social-auth-app-django
+requests
+request

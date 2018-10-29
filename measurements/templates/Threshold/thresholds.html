@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="content">
+    <div class="">
+        <div class="page-header-title">
+            <h4 class="page-title">Threshols</h4>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="page-content-wrapper">
+        <div class="container">
+            <!-- Content page -->
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {% if role == "Gerencia Campus" %}
+                    <table class="table table-hover">
+                        <thead>
+                        <tr style="color:#0E2EB0">
+                            <th font color="red">Variable</th>
+                            <th>Max. Threshold</th>
+                            <th>Min. Threshold</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for threshold in threshold_list %}
+                        <tr>
+                            <td>{{ threshold.variable.name }}</td>
+                            <td>{{ threshold.thresholdMax }}</td>
+                            <td>{{ threshold.thresholdMin }}</td>
+                            <td><a href="/threshold/{{ threshold.variable.id }}/">
+                                <img src="/static/media/lupa.png" height="40px" width="40px">
+                            </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                    {% else %}
+
+                    <h2>Usuario no autorizado</h2>
+
+                    {% endif %}
+
+                    <div style="text-align:center;">
+                        <button type="button" class="btn btn-primary waves-effect waves-light"
+                                onClick=" window.location.href='/' ">
+                            Back
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

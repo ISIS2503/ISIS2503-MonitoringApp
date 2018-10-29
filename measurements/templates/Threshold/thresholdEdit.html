@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<form method="POST"> 
+    {% csrf_token %}
+    <h2>{{ variable }}</h2>
+    <br>
+    {% if role == "Gerencia Campus" %}
+    {{ form.as_p }} 
+    {% else %}
+    <h2>Usuario no autorizado</h2>
+    {% endif %}
+    <button type="submit" class="btn btn-primary waves-effect waves-light">Actualizar</button>
+</form> 
+{% endblock %}
