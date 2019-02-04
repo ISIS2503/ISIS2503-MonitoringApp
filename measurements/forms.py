@@ -1,20 +1,31 @@
 from django import forms
-from .models import Threshold
+from .models import Variable, Measurement
 
-
-class ThresholdForm(forms.ModelForm):
-
+class MeasurementForm(forms.ModelForm):
     class Meta:
-        model = Threshold
+        model = Measurement
         fields = [
-            'thresholdMax',
-            'thresholdMin',
+            'variable',
+            'value',
+            'unit',
+            'place',
+            #'dateTime',
+        ]
+
+        labels = {
+            'variable' : 'Variable',
+            'value' : 'Value',
+            'unit' : 'Unit',
+            'place' : 'Place',
+            #'dateTime' : 'Date Time',
+        }
+
+class VariableForm(forms.ModelForm):
+    class Meta:
+        model = Variable
+        fields = [
+            'name',
         ]
         labels = {
-            'thresholdMax': 'Max. Threshold',
-            'thresholdMin': 'Min. Threshold',
-        }
-        widgets = {
-            'thresholdMax': forms.TextInput(attrs={'class':'form-control'}),
-            'thresholdMin': forms.TextInput(attrs={'class':'form-control'}),
+            'name': 'Name',
         }

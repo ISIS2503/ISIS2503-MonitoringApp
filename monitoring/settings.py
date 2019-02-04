@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
-    'rest_framework',
     'measurements',
 ]
 
@@ -81,9 +79,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'name_db',
         'USER': 'user_db',
-        'PASSWORD': 'pass',
-        'HOST': 'ip_instance',
-        'PORT': '5432',
+        'PASSWORD': 'user_password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

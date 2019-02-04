@@ -28,31 +28,19 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/thresholds/">Thresholds</a>
+                    <a class="nav-link" href="/variables/">Variables</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/measurements/">Measurements</a>
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-lg-0">
-                {% if user.is_authenticated %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a style="font-size:120%" class="nav-link">{{ user.username }}</a></li>
-                    <li><a style="font-size:120%; padding-right:20px" class="nav-link" href="/logout">Log out</a></li>
-                </ul>
-                {% else %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a style="font-size:120%; padding-right:20px" class="navbar-link" href="/login/auth0">Login</a></li>
-                </ul>
-                {% endif %}
-            </form>
           </div>
         </nav>
 
 
         <main> 
-          <div class="container">
+          <div class="container" style="min-height: 580px;">
           {% block content %} 
           {% endblock %} 
           </div>
@@ -61,7 +49,7 @@
     </body>
 
     <!-- Footer -->
-        <footer style="background-color: #D8D8D8; position: absolute; bottom: 0; width: 100%; height: 100px;">
+        <footer style="background-color: #D8D8D8; position: relative; bottom: 0; width: 100%; height: 100px;">
 
             <div style="padding: 30px">
                 <div style="float: left; width: 400px;" >ISIS-2503 Arquitectura y Diseño de Software</div>

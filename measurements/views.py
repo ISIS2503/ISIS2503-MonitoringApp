@@ -1,42 +1,62 @@
-from .models import Measurement, Threshold, Variable
+from .models import Measurement, Variable
 from django.shortcuts import render, redirect
-from .forms import ThresholdForm
-from django.contrib.auth.decorators import login_required
-import json, requests
+from .forms import VariableForm, MeasurementForm
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def index(request):
     return render(request, 'index.html')
 
-@login_required
 def MeasurementList(request):
-    queryset = Measurement.objects.all().order_by('-time')[:10]
+    queryset = Measurement.objects.all().order_by('-dateTime')[:10]
     context = {
         'measurement_list': queryset
     }
     return render(request, 'Measurement/measurements.html', context)
 
-@login_required
-def ThresholdList(request):
-    queryset = Threshold.objects.all()
-    role = getRole(request)
-    context = {
-        'threshold_list': queryset,
-        'role': role
-    }
-    print("role= ", role)
-    return render(request, 'Threshold/thresholds.html', context)
-
-@login_required
-def ThresholdEdit(request, id_threshold):
-    threshold = Threshold.objects.get(variable=id_threshold)
-    varName = Variable.objects.get(id=id_threshold)
-    if request.method == 'GET':
-        form = ThresholdForm(instance=threshold)
-    else:
-        form =ThresholdForm(request.POST, instance=threshold)
+def MeasurementCreate(request):
+    if request.method == 'POST':
+        form = MeasurementForm(request.POST)
         if form.is_valid():
-            form.save()
-        return redirect('thresholdList')
-    role = getRole(request)
-    return render(request, 'Threshold/thresholdEdit.html', {'form':form, 'variable':varName.name, 'role': role})
+            measurement = form.save()
+            measurement.save()
+            messages.add_message(request, messages.SUCCESS, 'Measurement create successful')
+            return HttpResponseRedirect(reverse('measurementCreate'))
+        else:
+            print(form.errors)
+    else:
+        form = MeasurementForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'Measurement/measurementCreate.html', context)
+
+def VariableList(request):
+    queryset = Variable.objects.all()
+    context = {
+        'variable_list': queryset
+    }
+    return render(request, 'Variable/variables.html', context)
+
+def VariableCreate(request):
+    if request.method == 'POST':
+        form = VariableForm(request.POST)
+        if form.is_valid():
+            measurement = form.save()
+            measurement.save()
+            messages.add_message(request, messages.SUCCESS, 'Variable create successful')
+            return HttpResponseRedirect(reverse('variableCreate'))
+        else:
+            print(form.errors)
+    else:
+        form = VariableForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'Variable/variableCreate.html', context)

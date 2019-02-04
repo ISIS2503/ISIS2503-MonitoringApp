@@ -5,6 +5,13 @@
     <div class="">
         <div class="page-header-title">
             <h4 class="page-title">Last Ten Measures</h4>
+            <!--- 
+            <div style="text-align:right;">
+                <button type="button" class="btn btn-success waves-effect waves-light"
+                        onClick=" window.location.href='/measurementcreate' " style="text-align:center;">+
+                </button>
+            </div>
+            --->
         </div>
     </div>
 
@@ -23,7 +30,7 @@
                             <th>Value</th>
                             <th>Unit</th>
                             <th>Place</th>
-                            <th>Time</th>
+                            <th>Date Time</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,7 +41,7 @@
                             <td>{{ measurement.value }}</td>
                             <td>{{ measurement.unit }}</td>
                             <td>{{ measurement.place }}</td>
-                            <td>{{ measurement.time }}</td>
+                            <td>{{ measurement.dateTime }}</td>
                         </tr>
                         {% endfor %}
 
