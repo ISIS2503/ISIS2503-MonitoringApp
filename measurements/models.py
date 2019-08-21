@@ -1,15 +1,8 @@
 from django.db import models
-
-# Create your models here.
-
-class Variable(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return '{}'.format(self.name)
+from variables.models import Variable
 
 class Measurement(models.Model):
-    variable = models.ForeignKey(Variable, on_delete=models.CASCADE)
+    variable = models.ForeignKey(Variable, on_delete=models.CASCADE, default=None)
     value = models.FloatField(null=True, blank=True, default=None)
     unit = models.CharField(max_length=50)
     place = models.CharField(max_length=50)

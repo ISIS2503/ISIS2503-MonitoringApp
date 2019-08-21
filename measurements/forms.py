@@ -1,5 +1,5 @@
 from django import forms
-from .models import Variable, Measurement
+from .models import Measurement
 
 class MeasurementForm(forms.ModelForm):
     class Meta:
@@ -18,14 +18,4 @@ class MeasurementForm(forms.ModelForm):
             'unit' : 'Unit',
             'place' : 'Place',
             #'dateTime' : 'Date Time',
-        }
-
-class VariableForm(forms.ModelForm):
-    class Meta:
-        model = Variable
-        fields = [
-            'name',
-        ]
-        labels = {
-            'name': 'Name',
         }
