@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'measurements',
     'variables',
-    'citas',
+    'cita',
+    'psicologo',
 ]
 
 MIDDLEWARE = [
