@@ -5,4 +5,4 @@ class Psicologo (models.Model):
     edad= models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
-        return '{}'.format(self.nombre,self.edad)
+        return '%s %s' %(self.nombre,self.edad)
