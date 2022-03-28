@@ -25,5 +25,5 @@ urlpatterns = [
 
 
 
-    path('acompanante', include('acompanantes.urls')),
+    path('acompanante', include('acompanante.urls')),
 ]
