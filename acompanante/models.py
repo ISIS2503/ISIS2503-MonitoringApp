@@ -1,7 +1,8 @@
 
 from django.db import models
+"""
 from estudianteEstrella.models import EstudianteEstrella
-
+"""
 class Acompanante(models.Model):
 
     nombre = models.CharField(max_length=50)
