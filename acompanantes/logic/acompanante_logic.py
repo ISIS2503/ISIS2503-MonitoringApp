@@ -1,5 +1,12 @@
 """
-def get_acompanante(var_pk):
-    acompanante =Acompanante.objects.get(pk=var_pk)
-    return acompanante
+from ..models import Acompanante
+
+def get_measurements():
+    queryset = Measurement.objects.all().order_by('-dateTime')[:10]
+    return (queryset)
+
+def create_acompanante(form):
+    acompanante = form.save()
+    acompanante.save()
+    return ()
 """
