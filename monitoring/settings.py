@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'measurements',
     'variables',
-    'acompanante',
+    'acompanantes',
     'cita',
     'psicologo',
 ]
