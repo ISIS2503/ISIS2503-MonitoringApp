@@ -5,20 +5,20 @@ from django.urls import reverse
 from .forms import AcompananteForm
 from .logic.acompanante_logic import get_acompanante, create_acompanante
 
-def variable_list(request):
-    variables = get_acompanante()
+def acompanante_list(request):
+    acompanantes = get_acompanante()
     context = {
-        'variable_list': variables
+        'acompanante_list': acompanantes
     }
-    return render(request, 'Variable/variables.html', context)
+    return render(request, 'Acompanante/acompanante.html', context)
 
-def variable_create(request):
+def acompanante_create(request):
     if request.method == 'POST':
         form = AcompananteForm(request.POST)
         if form.is_valid():
             create_acompanante(form)
-            messages.add_message(request, messages.SUCCESS, 'Successfully created variable')
-            return HttpResponseRedirect(reverse('variableCreate'))
+            messages.add_message(request, messages.SUCCESS, 'Successfully created acompanante')
+            return HttpResponseRedirect(reverse('acompananteCreate'))
         else:
             print(form.errors)
     else:
@@ -27,4 +27,4 @@ def variable_create(request):
     context = {
         'form': form,
     }
-    return render(request, 'Variable/variableCreate.html', context)
+    return render(request, 'Acompanante/acompananteCreate.html', context)
