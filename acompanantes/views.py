@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import VariableForm
+from .forms import AcompananteForm
 from .logic.acompanante_logic import get_acompanante, create_acompanante
 
 def variable_list(request):
@@ -14,7 +14,7 @@ def variable_list(request):
 
 def variable_create(request):
     if request.method == 'POST':
-        form = VariableForm(request.POST)
+        form = AcompananteForm(request.POST)
         if form.is_valid():
             create_acompanante(form)
             messages.add_message(request, messages.SUCCESS, 'Successfully created variable')
@@ -22,7 +22,7 @@ def variable_create(request):
         else:
             print(form.errors)
     else:
-        form = VariableForm()
+        form = AcompananteForm()
 
     context = {
         'form': form,
