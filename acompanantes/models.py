@@ -9,6 +9,7 @@ class Acompanante(models.Model):
     
     edad = models.FloatField(null=True, blank=True, default=None)
     """
+    TOCA ARREGLAR ONE-TO-ONE
     estudiante = models.ForeignKey(EstudianteEstrella, on_delete=models.CASCADE, default=None)
     """
     def __str__(self):
