@@ -23,6 +23,8 @@ urlpatterns = [
     path('', include('measurements.urls')),
     path('', include('variables.urls')),
     path('', include('acompanantes.urls')),
+    path('', include('cita.urls')),
+    path('', include('psicologo.urls')),
 
 
 

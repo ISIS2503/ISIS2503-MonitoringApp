@@ -3,11 +3,14 @@ from django.db import models
 # Create your models here. hola
 from psicologo.models import Psicologo
 from acompanantes.models import Acompanantes
+from estudianteEstrella.models import EstudianteEstrella
+
 
 
 class Cita(models.Model):
     psicologo = models.ForeignKey(Psicologo, on_delete=models.CASCADE, default=None)
-    acompanantes = models.ForeignKey(Acompanantes, on_delete=models.CASCADE, default=None)
+    acompanantes = models.ForeignKey(Acompanantes, on_delete=models.CASCADE, default=None)  
+    estudianteEstrella = models.ForeignKey(EstudianteEstrella, on_delete=models.CASCADE, default=None)
     dateTime = models.DateTimeField(auto_now=False, auto_now_add=False)
     plataforma = models.CharField(max_length=50)
 
