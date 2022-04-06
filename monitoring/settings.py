@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'acompanantes',
     'cita',
     'psicologo',
+    'estudianteEstrella',
 ]
 
 MIDDLEWARE = [
