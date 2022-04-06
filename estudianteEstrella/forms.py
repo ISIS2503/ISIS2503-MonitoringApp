@@ -7,8 +7,10 @@ class EstudianteEstrellaForm(forms.ModelForm):
         fields = [
             'nombre',
             'edad',
+            'activo'
         ]
         labels = {
             'nombre': 'Nombre',
             'edad': 'Edad',
+            'activo': 'Activo',
         }
