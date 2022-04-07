@@ -3,7 +3,7 @@
 
 from ..models import Cita
 
-def get_citas():
+def get_cita():
     queryset = Cita.objects.all
     return queryset
 
