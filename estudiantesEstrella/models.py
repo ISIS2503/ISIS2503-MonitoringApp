@@ -6,7 +6,7 @@ class EstudianteEstrella(models.Model):
 
     nombre = models.CharField(max_length=50)
     edad = models.FloatField(null=True, blank=True, default=None)
-    activo = models.BooleanField();
+    activo = models.BooleanField()
     #acompanante = models.ForeignKey(Acompanante, on_delete=models.CASCADE)
     #psicologo = models.ForeignKey(Psicologo, on_delete=models.CASCADE)
     
