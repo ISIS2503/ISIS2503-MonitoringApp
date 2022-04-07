@@ -10,7 +10,7 @@ def acompanante_list(request):
     context = {
         'acompanante_list': acompanantes
     }
-    return render(request, 'Acompanante/acompanante.html', context)
+    return render(request, 'Acompanante/acompanantes.html', context)
 
 def acompanante_create(request):
     if request.method == 'POST':
