@@ -1,9 +1,9 @@
 from django import forms
-from .models import Acompanante
+from .models import Psicologo
 
-class AcompananteForm(forms.ModelForm):
+class PsicologoForm(forms.ModelForm):
     class Meta:
-        model = Acompanante
+        model = Psicologo
         fields = [
             'nombre',
             'edad',
