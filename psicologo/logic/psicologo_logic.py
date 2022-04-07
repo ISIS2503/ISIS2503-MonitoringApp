@@ -3,7 +3,7 @@
 
 from ..models import Psicologo
 
-def get_psicologo():
+def get_psicologos():
     queryset = Psicologo.objects.all()
     return (queryset)
 
