@@ -6,10 +6,10 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import CitaForm
-from .logic.cita_logic import get_cita, create_cita
+from .logic.cita_logic import get_cita, create_cita, get_citas
 
 def cita_list(request):
-    cita = get_cita()
+    cita = get_citas()
     context = {
         'cita_list': cita
     }
