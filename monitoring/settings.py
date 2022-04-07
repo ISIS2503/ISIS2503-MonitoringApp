@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'measurements',
     'variables',
     'acompanantes',
-    
+    'citas',
 ]
 
 MIDDLEWARE = [

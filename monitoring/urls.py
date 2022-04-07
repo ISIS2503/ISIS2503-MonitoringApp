@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('measurements.urls')),
     path('', include('variables.urls')),
     path('', include('acompanantes.urls')),
-
+    path('', include('citas.urls')),
 
 
   
