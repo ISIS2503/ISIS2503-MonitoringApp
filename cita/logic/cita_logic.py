@@ -3,7 +3,7 @@
 
 from ..models import Cita
 
-def get_citas(var_pk):
+def get_cita(var_pk):
     queryset = Cita.objects.get(pk=var_pk)
     return queryset
 
