@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'variables',
     'acompanantes',
     'citas',
+    'estudianteEstrella',
 ]
 
 MIDDLEWARE = [

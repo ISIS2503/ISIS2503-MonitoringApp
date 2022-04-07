@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('variables.urls')),
     path('', include('acompanantes.urls')),
     path('', include('citas.urls')),
-
+    path('', include('estudianteEstrella.urls')),
 
   
 ]
