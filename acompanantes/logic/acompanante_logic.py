@@ -3,8 +3,8 @@
 
 from ..models import Acompanante
 
-def get_acompanante(var_pk):
-    measurement = Acompanante.objects.get(pk=var_pk)
+def get_acompanante():
+    measurement = Acompanante.objects.all
     return measurement
 
 def create_acompanante(form):
