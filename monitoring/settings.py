@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'measurements',
     'variables',
     'acompanantes',
-    'cita',
-    'psicologo',
+    
 ]
 
 MIDDLEWARE = [
