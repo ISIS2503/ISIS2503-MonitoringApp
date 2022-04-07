@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    #'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'datos',
-        'USER': 'admin',
+        'NAME': 'copia',
+        'USER': 'grupo2',
         'PASSWORD': 'grupo2',
-        'HOST': '174.24.41.140',
+        'HOST': '174.24.41.134',
         'PORT': '5432',
     }
 }
