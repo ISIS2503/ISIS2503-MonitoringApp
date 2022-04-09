@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here. hola
-#from psicologo.models import Psicologo
+from psicologos.models import Psicologo
 
 #from acompanantes.models import Acompanante
 
@@ -10,7 +10,7 @@ from django.db import models
 
 
 class Cita(models.Model):
-    #psicologo = models.ForeignKey(Psicologo, on_delete=models.CASCADE, default=None)
+    psicologo = models.ForeignKey(Psicologo, on_delete=models.CASCADE, default=None)
 
     #acompanantes = models.ForeignKey(Acompanante, on_delete=models.CASCADE, default=None) 
     

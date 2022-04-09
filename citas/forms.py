@@ -5,10 +5,12 @@ class CitaForm(forms.ModelForm):
     class Meta:
         model = Cita
         fields = [
+            'pscilogo',
             'dateTime',
             'plataforma',   
         ]
         labels = {
+            'psicologo': 'Psicologo',
             'dateTime': 'DateTime',
             'plataforma': 'Plataforma',
         }
