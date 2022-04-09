@@ -1,15 +1,13 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import CitaForm
-from .logic.cita_logic import get_cita, create_cita
+from .logic.cita_logic import get_citas, create_cita
 
 def cita_list(request):
-    citas = get_cita()
+    citas = get_citas()
     context = {
         'cita_list': citas
     }

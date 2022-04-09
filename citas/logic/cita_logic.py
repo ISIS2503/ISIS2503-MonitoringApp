@@ -3,7 +3,7 @@
 
 from ..models import Cita
 
-def get_cita():
+def get_citas():
     queryset = Cita.objects.all().order_by('-dateTime')[:10]
     return queryset
 
