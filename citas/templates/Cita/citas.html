@@ -27,6 +27,7 @@
                         <thead>
                         <tr style="color:#0E2EB0">
                             <!---<th font color="red">Variable</th>--->
+                            <th font color="red">Psicologo</th>
                             <th>DateTime</th>
                             <th>Plataforma</th>
                         </tr>
@@ -35,7 +36,7 @@
 
                         {% for cita in cita_list %}
                         <tr>
-               
+                            <td>{{ cita.psicologo.nombre }}</td>
                             <td>{{ cita.dateTime }}</td>
                             <td>{{ cita.plataforma  }}</td>
            
