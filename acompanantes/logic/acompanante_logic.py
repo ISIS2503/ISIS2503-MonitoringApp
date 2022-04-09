@@ -4,8 +4,8 @@
 from ..models import Acompanante
 
 def get_acompanante():
-    measurement = Acompanante.objects.all()
-    return measurement
+    acompanante = Acompanante.objects.all()
+    return acompanante
 
 def create_acompanante(form):
     acompanante = form.save()
