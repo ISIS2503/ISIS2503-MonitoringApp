@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'citas',
     'estudiantesEstrella',
     'psicologos',
+    'social_django',
 
 ]
 
@@ -138,3 +139,25 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+LOGIN_URL ="/login/auth0"
+LOGIN_REDIRECT_URL="/"
+LOGOUT_REDIRECT_URL="https://isis2503-juancamiloeduardo.us.auth0.com/v2/logout?returnTo=http%3A%2F%2F54.146.247.158:8000"
+
+SOCIAL_AUTH_TRAILING_SLASH=False
+SOCIAL_AUTH_AUTH0_DOMAIN='isis2503-juancamiloeduardo.us.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY='BpXJ2yDYznOGXwLNws2Jnrx0yL2FNIEv'
+SOCIAL_AUTH_AUTH0_SECRET='tnFJV6sto5DBbff8QWad_PnBj2IYAq26zmmONTNxfz8C-vWQHpcBzQmDCESqvRPu'
+
+SOCIAL_AUTH_AUTH0_SCOPE= [
+'openid'
+'profile'
+'email'
+'role'
+]
+AUTHENTICATION_BAKENDS={
+'monitoring.auth0backend.Auth0',
+'django.contrib.auth.bakends.ModelBackend',
+}
+
+
