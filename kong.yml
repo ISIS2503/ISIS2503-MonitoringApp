@@ -1,0 +1,51 @@
+_format_version: "2.1"
+
+services:
+  - host: monitoring_upstream
+    name: monitoring_service
+    protocol: http
+    routes:
+      
+      - name: monitoring
+        paths:
+          - /
+        strip_path: false
+
+  - host: alarms_upstream
+    name: alarms_service
+    protocol: http
+    routes:
+      
+      - name: alarms
+        paths:
+          - /alarms
+          - /alarmsValidate/
+        strip_path: false
+    
+upstreams:
+  - name: alarms_upstream
+    targets:
+      - target: <ip-privada-alarms-app-a>:8080
+        weight: 100
+      - target: <ip-privada-alarms-app-b>:8080
+        weight: 100
+      - target: <ip-privada-alarms-app-c>:8080
+        weight: 100
+    #healthchecks:
+    #  threshold: 0
+    #  active:
+    #    http_path: /health/
+    #    timeout: 0
+    #    healthy:
+    #      successes: 0
+    #      interval: 0
+    #    unhealthy:
+    #      tcp_failures: 0
+    #      interval: 0
+
+  - name: monitoring_upstream
+    targets:
+      - target: <ip-privada-monitoring-app>:8080
+        weight: 100
+
+
