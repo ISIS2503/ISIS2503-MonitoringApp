@@ -1,0 +1,18 @@
+_format_version: "2.1"
+
+services:
+  - name: replica
+    url: http://127.0.0.1:8081/
+    routes:
+      - name: replica
+        paths:
+          - /
+        strip_path: false
+  - name: master
+    url: http://127.0.0.1:8080/
+    routes:
+      - name: master
+        paths:
+          - /measurementcreate/
+          - /variablecreate/
+        strip_path: true
