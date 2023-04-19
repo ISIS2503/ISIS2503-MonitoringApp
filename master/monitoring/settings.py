@@ -137,7 +137,7 @@ STATICFILES_DIRS = (
 
 # CQRS settings
 CQRS = {
-    'transport': 'dj_cqrs.transport.KombuTransport',
+    'transport': 'dj_cqrs.transport.RabbitMQTransport',
     'host': '<rabbit-ip>',
     'port': 5672,
     'user': 'monitoring-app',

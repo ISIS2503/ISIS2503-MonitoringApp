@@ -4,7 +4,6 @@ from dj_cqrs.mixins import ReplicaMixin
 class Variable(ReplicaMixin, models.Model):
     CQRS_ID = 'variable_model'
 
-    #id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
 
     def __str__(self):

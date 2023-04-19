@@ -6,7 +6,6 @@ class Measurement(MasterMixin, models.Model):
 
     CQRS_ID = 'measurement_model'
 
-    #id = models.IntegerField(primary_key=True)
     variable = models.ForeignKey(Variable, on_delete=models.CASCADE, default=None)
     value = models.FloatField(null=True, blank=True, default=None)
     unit = models.CharField(max_length=50)
