@@ -1,35 +1,35 @@
 _format_version: "2.1"
 
 services:
-  - host: monitoring_upstream
-    name: monitoring_service
+  - host: windmy_upstream
+    name: windmy_service
     protocol: http
     routes:
       
-      - name: monitoring
+      - name: windmy
         paths:
           - /
         strip_path: false
 
-  - host: alarms_upstream
-    name: alarms_service
+  - host: citas_upstream
+    name: citas_service
     protocol: http
     routes:
       
-      - name: alarms
+      - name: citas
         paths:
-          - /alarms
-          - /alarmsValidate/
+          - /citas
+          - /citasValidate/
         strip_path: false
     
 upstreams:
-  - name: alarms_upstream
+  - name: citas_upstream
     targets:
-      - target: <ip-privada-alarms-app-a>:8080
+      - target: <ip-privada-citas-app-a>:8080
         weight: 100
-      - target: <ip-privada-alarms-app-b>:8080
+      - target: <ip-privada-citas-app-b>:8080
         weight: 100
-      - target: <ip-privada-alarms-app-c>:8080
+      - target: <ip-privada-citas-app-c>:8080
         weight: 100
     #healthchecks:
     #  threshold: 0
@@ -43,9 +43,9 @@ upstreams:
     #      tcp_failures: 0
     #      interval: 0
 
-  - name: monitoring_upstream
+  - name: windmy_upstream
     targets:
-      - target: <ip-privada-monitoring-app>:8080
+      - target: <ip-privada-windmy-app>:8080
         weight: 100
 
 
