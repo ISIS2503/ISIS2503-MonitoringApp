@@ -8,8 +8,8 @@ services:
       
       - name: replica
         paths:
-          - /variables/
-          - /measurements/
+          - /variables
+          - /measurements
         strip_path: false
   - host: master_upstream
     name: master_service
@@ -18,17 +18,17 @@ services:
       
       - name: master
         paths:
-          - /measurementcreate/
-          - /variablecreate/
+          - /measurementcreate
+          - /variablecreate
         strip_path: false
     
 upstreams:
   - name: replica_upstream
     targets:
-      - target: <ip-replica>:8080
+      - target: <ip-privada-replica>:8080
         weight: 100
 
   - name: master_upstream
     targets:
-      - target: <ip-replica>:8080
+      - target: <ip-privada-master>:8080
         weight: 100

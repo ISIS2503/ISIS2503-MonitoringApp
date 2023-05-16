@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "0054c250-ef18-4f38-9b2d-39b6700e2803",
+		"name": "CQRS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23312038"
+	},
+	"item": [
+		{
+			"name": "Variables",
+			"item": [
+				{
+					"name": "Create variable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Temperature\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "<ip-publica-master>:8080/variablecreate/",
+							"host": [
+								"<ip-publica-master>"
+							],
+							"port": "8080",
+							"path": [
+								"variablecreate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get variables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "<ip-publica-replica>:8080/variables/",
+							"host": [
+								"<ip-publica-replica>"
+							],
+							"port": "8080",
+							"path": [
+								"variables",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Measurements",
+			"item": [
+				{
+					"name": "Create measurement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // Elimine este comentario - \"variable\" es el id de la variable creadas\r\n    \"variable\": 2,\r\n    \"value\": 25,\r\n    \"unit\": \"%\",\r\n    \"place\": \"ML\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "<ip-publica-master>:8080/measurementcreate/",
+							"host": [
+								"<ip-publica-master>"
+							],
+							"port": "8080",
+							"path": [
+								"measurementcreate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get measurements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "<ip-publica-replica>:8080/measurements",
+							"host": [
+								"<ip-publica-replica>"
+							],
+							"port": "8080",
+							"path": [
+								"measurements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
