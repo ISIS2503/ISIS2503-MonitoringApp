@@ -1,10 +1,19 @@
+from variables.models import Variable
 from ..models import Measurement
 
-def get_measurements():
-    queryset = Measurement.objects.all().order_by('-dateTime')[:10]
-    return (queryset)
-
 def create_measurement(form):
-    measurement = form.save()
-    measurement.save()
-    return ()
+    variable = None
+    try:
+        variable = Variable.objects.get(id=form["variable"])
+    except:
+        return False
+    if(variable == None):
+        return False
+    else:
+        measurement = Measurement()
+        measurement.variable = variable
+        measurement.value = form["value"]
+        measurement.unit = form["unit"]
+        measurement.place = form["place"]
+        measurement.save()
+        return True

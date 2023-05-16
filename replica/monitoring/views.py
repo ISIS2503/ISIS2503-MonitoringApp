@@ -6,3 +6,6 @@ def index(request):
 
 def health_check(request):
     return JsonResponse({'message': 'OK'}, status=200)
+
+def health_check(request):
+    return JsonResponse({'message': 'OK'}, status=200)

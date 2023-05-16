@@ -5,5 +5,4 @@ from . import views
 
 urlpatterns = [
     path('measurements/', views.measurement_list),
-    path('measurementcreate/', csrf_exempt(views.measurement_create), name='measurementCreate'),
 ]

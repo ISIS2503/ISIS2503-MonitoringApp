@@ -1,18 +1,34 @@
 _format_version: "2.1"
 
 services:
-  - name: replica
-    url: http://127.0.0.1:8081/
+  - host: replica_upstream
+    name: replica_service
+    protocol: http
     routes:
+      
       - name: replica
         paths:
-          - /
+          - /variables/
+          - /measurements/
         strip_path: false
-  - name: master
-    url: http://127.0.0.1:8080/
+  - host: master_upstream
+    name: master_service
+    protocol: http
     routes:
+      
       - name: master
         paths:
           - /measurementcreate/
           - /variablecreate/
-        strip_path: true
+        strip_path: false
+    
+upstreams:
+  - name: replica_upstream
+    targets:
+      - target: <ip-replica>:8080
+        weight: 100
+
+  - name: master_upstream
+    targets:
+      - target: <ip-replica>:8080
+        weight: 100

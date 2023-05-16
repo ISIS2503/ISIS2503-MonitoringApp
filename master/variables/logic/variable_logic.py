@@ -1,10 +1,8 @@
 from ..models import Variable
 
-def get_variables():
-    queryset = Variable.objects.all()
-    return (queryset)
-
 def create_variable(form):
-    measurement = form.save()
-    measurement.save()
-    return ()
+    variable = Variable()
+    variable = Variable()
+    variable.name = form["name"]
+    variable.save()
+    return variable

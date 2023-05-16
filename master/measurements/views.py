@@ -1,26 +1,19 @@
 from django.shortcuts import render
 from .forms import MeasurementForm
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from .logic.logic_measurement import create_measurement, get_measurements
-
-def measurement_list(request):
-    measurements = get_measurements()
-    context = {
-        'measurement_list': measurements
-    }
-    return render(request, 'Measurement/measurements.html', context)
+from django.http import HttpResponse
+from .logic.logic_measurement import create_measurement
+import json
 
 def measurement_create(request):
     if request.method == 'POST':
-        form = MeasurementForm(request.POST)
-        if form.is_valid():
-            create_measurement(form)
-            messages.add_message(request, messages.SUCCESS, 'Measurement create successful')
-            return HttpResponseRedirect(reverse('measurementCreate'))
+        data = request.body.decode('utf-8')
+        data_json = json.loads(data)
+        measurement = create_measurement(data_json)
+        if(measurement):
+            return HttpResponse('Successfully created measurement')
         else:
-            print(form.errors)
+           return HttpResponse('Error creating measurement, variable does not exist')
     else:
         form = MeasurementForm()
 

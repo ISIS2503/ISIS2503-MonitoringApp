@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.index),
     path('', include('measurements.urls')),
     path('', include('variables.urls')),
+    path('/health', views.health_check, name='health')
 ]
