@@ -22,4 +22,12 @@ urlpatterns = [
     path('', views.index),
     path('', include('measurements.urls')),
     path('', include('variables.urls')),
+    path('', include('acompanantes.urls')),
+    path('', include('citas.urls')),
+    path('', include('estudiantesEstrella.urls')),
+    path('', include('psicologos.urls')),
+    path(r'', include('django.contrib.auth.urls')),
+    path(r'', include('social_django.urls')),
+
+  
 ]
