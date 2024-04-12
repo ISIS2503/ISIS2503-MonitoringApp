@@ -5,7 +5,7 @@ class Variable(models.Model):
     lastname = models.CharField(max_length=50, default='')
     country = models.CharField(max_length=50, default='Colombia')
     city = models.CharField(max_length=50, default='Bogota')
-    phone = models.IntegerField()
+    phone = models.IntegerField(default=123456789)
     mail = models.CharField(max_length=50, default='@bancodelosalpes.com.co')
 
     def __str__(self):
