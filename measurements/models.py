@@ -1,5 +1,5 @@
 from django.db import models
-from solicitudes.models import Solicitud
+from variables.models import Variable
 
 class Measurement(models.Model):
     #variable = models.ForeignKey(Solicitud, on_delete=models.CASCADE, default=None)
