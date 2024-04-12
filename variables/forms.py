@@ -1,11 +1,11 @@
 from django import forms
-from .models import Solicitud
+from .models import Variable
 
 
 #TODO: llenar valores formulario
-class SolicitudForm(forms.ModelForm):
+class VariableForm(forms.ModelForm):
     class Meta:
-        model = Solicitud
+        model = Variable
         fields = [
             'name',
             'lastname',

@@ -7,7 +7,7 @@
             <h4 class="page-title">Solicitudes</h4>
             <div style="text-align:right;">
                 <button type="button" class="btn btn-success waves-effect waves-light"
-                        onClick=" window.location.href='/solicitudcreate' " style="text-align:center;">+
+                        onClick=" window.location.href='/variablecreate' " style="text-align:center;">+
                 </button>
             </div>
         </div>
@@ -30,24 +30,24 @@
                         </thead>
                         <tbody>
 
-                        {% for solicitud in solicitud_list %}
+                        {% for variable in variable_list %}
                         <tr>
-                            <td>{{ solicitud.name }}</td>
+                            <td>{{ variable.name }}</td>
                         </tr>
                         <tr>
-                            <td>{{ solicitud.lastname }}</td>
+                            <td>{{ variable.lastname }}</td>
                         </tr>
                         <tr>
-                            <td>{{ solicitud.country }}</td>
+                            <td>{{ variable.country }}</td>
                         </tr>
                         <tr>
-                            <td>{{ solicitud.city }}</td>
+                            <td>{{ variable.city }}</td>
                         </tr>
                         <tr>
-                            <td>{{ solicitud.phone }}</td>
+                            <td>{{ variable.phone }}</td>
                         </tr>
                         <tr>
-                            <td>{{ solicitud.mail }}</td>
+                            <td>{{ variable.mail }}</td>
                         </tr>
 
                         {% endfor %}
