@@ -3,10 +3,10 @@ from variables.models import Variable
 
 class Measurement(models.Model):
     #variable = models.ForeignKey(Solicitud, on_delete=models.CASCADE, default=None)
-    value = models.FloatField(null=True, blank=True, default=None)
-    unit = models.CharField(max_length=50)
-    place = models.CharField(max_length=50)
-    dateTime = models.DateTimeField(auto_now_add=True)
+    trabajo = models.FloatField(null=True, blank=True, default=None)
+    ingresos = models.FloatField(null=True, blank=True, default=None)
+    deudas = models.FloatField(null=True, blank=True, default=None)
+    creditos = models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
         return '%s %s' % (self.value, self.unit)
