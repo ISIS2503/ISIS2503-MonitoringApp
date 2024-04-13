@@ -9,4 +9,4 @@ class Measurement(models.Model):
     creditos = models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
-        return '%s %s' % (self.value, self.unit)
+        return '{}'.format(self.trabajo)
