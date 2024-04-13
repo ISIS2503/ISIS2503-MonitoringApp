@@ -11,19 +11,21 @@
     <br>
 
     <style>
-        body {
+        .content {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: space-around;
             flex-wrap: wrap;
+            justify-content: flex-start; /* Align to the start of the container */
             padding: 20px;
             background-color: #f4f4f4;
+            max-width: 960px; /* Adjust this to fit 3 cards (300px * 3 + (10px * 2 * 3) margin) */
+            margin: auto; /* Center the container */
         }
         .card {
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 300px;
+            width: 300px; /* Fixed width for each card */
             margin: 10px;
             overflow: hidden;
         }
@@ -44,10 +46,10 @@
             font-size: 16px;
             color: #666;
         }
-    </style>   
+    </style>    
 
     <div class="card">
-        <img src="/static/media/gold.jpeg" alt="Imagen Tarjeta 1">
+        <img src="/static/media/platinum.jpeg" alt="Imagen Tarjeta 1">
         <div class="card-body">
             <h2 class="card-title">Tarjeta Platinum</h2>
             <p class="card-text">Cupo disponible: $12,000,000</p>
@@ -63,9 +65,9 @@
     </div>
     
     <div class="card">
-        <img src="/static/media/gold.jpeg" alt="Imagen Tarjeta 3">
+        <img src="/static/media/world.png" alt="Imagen Tarjeta 3">
         <div class="card-body">
-            <h2 class="card-title">Tarjeta Classic</h2>
+            <h2 class="card-title">Tarjeta World</h2>
             <p class="card-text">Cupo disponible: $3,000,000</p>
         </div>
     </div>
