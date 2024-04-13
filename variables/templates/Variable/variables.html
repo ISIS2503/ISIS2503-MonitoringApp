@@ -4,10 +4,11 @@
 <div class="content">
     <div class="">
         <div class="page-header-title">
-            <h4 class="page-title">Variables</h4>
+            <h4 class="page-title">Solicitudes</h4>
             <div style="text-align:right;">
                 <button type="button" class="btn btn-success waves-effect waves-light"
-                        onClick=" window.location.href='/variablecreate' " style="text-align:center;">+
+                        onClick=" window.location.href='/' ">
+                    Atrás
                 </button>
             </div>
         </div>
@@ -21,30 +22,46 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
+                    </body>
+                    <h1>Términos y Condiciones de Adquisición de Tarjeta de Crédito con el Banco de los Alpes - Plataforma Virtual</h1>
 
-                    <table class="table table-hover">
-                        <thead>
-                        <tr style="color:#0E2EB0">
-                            <th>Variable</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% for variable in variable_list %}
-                        <tr>
-                            <td>{{ variable.name }}</td>
-                        </tr>
-                        {% endfor %}
-
-                        </tbody>
-                    </table>
-
+                    <ol>
+                    <li>
+                        <h2>Requisitos para Solicitar la Tarjeta de Crédito:</h2>
+                        <ul>
+                        <li>Ser mayor de edad según la legislación colombiana.</li>
+                        <li>Ser residente legal en Colombia.</li>
+                        <li>Contar con un documento de identificación válido y vigente.</li>
+                        <li>Demostrar capacidad de pago, presentando tus últimos dos desprendibles de pago.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>Firma de Documentos:</h2>
+                        <p>Al aceptar nuestra oferta, podrás completar el proceso de adquisición de la tarjeta de crédito a través de nuestra plataforma virtual. La firma de los documentos necesarios se realizará electrónicamente y constituirá tu compromiso de cumplir con los términos y condiciones del contrato de tarjeta de crédito con el Banco de los Alpes.</p>
+                    </li>
+                    <li>
+                        <h2>Carga de Documentos:</h2>
+                        <p>Deberás cargar los siguientes documentos de manera electrónica como parte del proceso de solicitud:</p>
+                        <ul>
+                        <li>Copia escaneada de tu documento de identificación por ambas caras.</li>
+                        <li>Imágenes digitales de tus últimos dos desprendibles de pago.</li>
+                        </ul>
+                        <p>Nuestra plataforma verificará la autenticidad de los documentos cargados automáticamente.</p>
+                    </li>
+                    <li>
+                        <h2>Cumplimiento de Regulaciones Estatales:</h2>
+                        <p>En el Banco de los Alpes, nos regimos por las regulaciones estatales de Colombia. Estas normativas garantizan la transparencia y protegen los derechos de nuestros clientes en todas nuestras operaciones financieras.</p>
+                    </li>
+                    </ol>
+                    <p>Al continuar con la solicitud de tu tarjeta de crédito con el Banco de los Alpes a través de nuestra plataforma virtual, aceptas y reconoces haber leído y entendido estos términos y condiciones, así como también confirmas que cumples con los requisitos mencionados anteriormente.</p>
+                    </body>
                     <div style="text-align:center;">
                         <button type="button" class="btn btn-primary waves-effect waves-light"
-                                onClick=" window.location.href='/' ">
-                            Back
+                                onClick=" window.location.href='/variablecreate' " style="text-align:center;">Continuar
                         </button>
                     </div>
+
+                    
 
                 </div>
             </div>
