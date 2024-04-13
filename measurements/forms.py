@@ -9,11 +9,9 @@ class MeasurementForm(forms.ModelForm):
             'ingresos',
             'deudas',
             'creditos',
-            #'dateTime',
         ]
 
         labels = {
-            #'variable' : 'Variable',
             'trabajo' : 'Trabajo',
             'ingresos' : 'Ingresos',
             'deudas' : 'Deudas',
