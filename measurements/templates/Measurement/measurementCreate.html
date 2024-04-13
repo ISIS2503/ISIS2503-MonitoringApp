@@ -4,9 +4,7 @@
     {% csrf_token %}
     <br>
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success waves-effect waves-light">Create</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"
-                                onClick=" window.location.href='/measurements' ">Back
-    </button>
+    <button type="submit" class="btn btn-success waves-effect waves-light" onClick=" window.location.href='/measurements' ">Create</button>
+    <button type="button" class="btn btn-primary waves-effect waves-light">Back</button>
 </form>
 {% endblock %}
