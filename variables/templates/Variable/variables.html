@@ -54,13 +54,17 @@
                     </li>
                     </ol>
                     <p>Al continuar con la solicitud de tu tarjeta de crédito con el Banco de los Alpes a través de nuestra plataforma virtual, aceptas y reconoces haber leído y entendido estos términos y condiciones, así como también confirmas que cumples con los requisitos mencionados anteriormente.</p>
-
+                    {% if variable_list %}
+                    <p>¡Registro exitoso!</p>
+                    {% endif %}
                     </body>
                     <div style="text-align:center;">
                         <button type="button" class="btn btn-primary waves-effect waves-light"
                                 onClick=" window.location.href='/variablecreate' " style="text-align:center;">Continuar
                         </button>
                     </div>
+
+                    
 
                 </div>
             </div>
