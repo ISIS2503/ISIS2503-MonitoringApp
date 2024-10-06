@@ -1,7 +1,8 @@
 import logging
 import time
 
-logger = logging.getLogger(__name__)
+# Cambié el logger a uno específico para el middleware
+logger = logging.getLogger('middleware')
 
 class RequestTimingMiddleware:
     def __init__(self, get_response):
@@ -20,6 +21,6 @@ class RequestTimingMiddleware:
         log_end_time = time.time()
 
         log_time = log_end_time - log_start_time
-        logger.info(f"Logging took {log_time:.6f} seconds")  # Cambié a 6 decimales para mayor precisión
+        logger.info(f"Logging took {log_time:.5f} seconds")  # Cambié a 5 decimales para mayor precisión
 
         return response

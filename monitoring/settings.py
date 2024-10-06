@@ -135,6 +135,10 @@ STATICFILES_DIRS = (
 )
 
 import os
+import logging.config
+
+# Asegúrate de que BASE_DIR esté definido
+
 
 LOGGING = {
     'version': 1,
@@ -151,17 +155,24 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'INFO',  # Puedes cambiar esto a DEBUG para más información
+            'level': 'INFO',  # Puedes cambiar a DEBUG si quieres más información
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/request_timing.log'),
+            'filename': os.path.join(BASE_DIR, 'logs/request_timing.log'),  # Asegúrate de que la ruta sea correcta
             'formatter': 'verbose',
         },
     },
     'loggers': {
-        'request_timing': {
+        'django': {
             'handlers': ['file'],
-            'level': 'INFO',  # Asegúrate de que esto esté en INFO o DEBUG
+            'level': 'INFO',
             'propagate': True,
+        },
+        # Logger específico para tu middleware
+        'middleware': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
+
