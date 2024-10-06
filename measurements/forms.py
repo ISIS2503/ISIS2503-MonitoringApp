@@ -9,7 +9,7 @@ class MeasurementForm(forms.ModelForm):
             'value',          # Precio de matrícula
             'unit',           # Curso
             'place',          # Institución o lugar de matrícula
-            #'dateTime',      # Fecha de matrícula (mantener, pero desactivado)
+            'extra_payment',  # Pagos extras
         ]
 
         labels = {
@@ -17,5 +17,5 @@ class MeasurementForm(forms.ModelForm):
             'value': 'Precio de Matrícula',
             'unit': 'Curso',
             'place': 'Lugar de Matrícula',
-            #'dateTime': 'Fecha de Matrícula',
+            'extra_payment': 'Pago Extra',
         }

@@ -1,59 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <div class="content">
-    <div class="">
-        <div class="page-header-title">
-            <h4 class="page-title">Últimas Diez Mediciones</h4>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="page-content-wrapper">
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr style="color:#0E2EB0">
-                            <th>Estudiante</th>
-                            <th>Precio de Matrícula</th>
-                            <th>Curso</th>
-                            <th>Lugar de Matrícula</th>
-                            <th>Fecha de Matrícula</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% for measurement in measurement_list %}
-                        <tr>
-                            <td>{{ measurement.variable.name }}</td>
-                            <td>{{ measurement.value }}</td>
-                            <td>{{ measurement.unit }}</td>
-                            <td>{{ measurement.place }}</td>
-                            <td>{{ measurement.dateTime }}</td>
-                        </tr>
-                        {% endfor %}
-
-                        </tbody>
-                    </table>
-
-                    <div style="text-align:center;">
-                        <button type="button" class="btn btn-success waves-effect waves-light"
-                                onClick=" window.location.href='/measurementcreate' ">
-                            Crear Nueva Matrícula
-                        </button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light"
-                                onClick=" window.location.href='/' ">
-                            Volver
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    <h4>Matrículas y Pagos Extra</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Estudiante</th>
+            <th>Precio de Matrícula</th>
+            <th>Curso</th>
+            <th>Lugar de Matrícula</th>
+            <th>Pago Extra</th>
+            <th>Fecha de Matrícula</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for measurement in measurement_list %}
+        <tr>
+            <td>{{ measurement.variable.name }}</td>
+            <td>{{ measurement.value }}</td>
+            <td>{{ measurement.unit }}</td>
+            <td>{{ measurement.place }}</td>
+            <td>{{ measurement.extra_payment }}</td>
+            <td>{{ measurement.dateTime }}</td>
+          
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'measurement_create' %}" class="btn btn-success">Agregar Matrícula</a>
 </div>
-
 {% endblock %}

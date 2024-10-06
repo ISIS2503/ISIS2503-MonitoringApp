@@ -6,7 +6,13 @@ class VariableForm(forms.ModelForm):
         model = Variable
         fields = [
             'name',
+            'birth_date',  # Fecha de nacimiento
+            'age',         # Edad
+            'course',      # Curso
         ]
         labels = {
-            'name': 'Name',
+            'name': 'Nombre',
+            'birth_date': 'Fecha de nacimiento',
+            'age': 'Edad',
+            'course': 'Curso',
         }

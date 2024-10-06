@@ -2,12 +2,9 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
-    <br>
     <h4>Crear Nueva Matrícula</h4>
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success waves-effect waves-light">Crear</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"
-            onClick=" window.location.href='/measurements' ">Volver
-    </button>
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% url 'measurement_list' %}" class="btn btn-primary">Volver</a>
 </form>
 {% endblock %}

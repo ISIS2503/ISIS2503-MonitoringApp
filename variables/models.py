@@ -2,7 +2,9 @@ from django.db import models
 
 class Variable(models.Model):
     name = models.CharField(max_length=50)
+    birth_date = models.DateField(null=True, blank=True)  # Fecha de nacimiento
+    age = models.IntegerField(null=True, blank=True)  # Edad
+    course = models.CharField(max_length=100, null=True, blank=True)  # Curso
 
     def __str__(self):
-        return '{}'.format(self.name)
-
+        return f'{self.name} ({self.age} años)'
