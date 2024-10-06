@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'monitoring.middleware.RequestTimingMiddleware',
 ]
 
 ROOT_URLCONF = 'monitoring.urls'
@@ -132,3 +133,35 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',  # Puedes cambiar esto a DEBUG para más información
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/request_timing.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'request_timing': {
+            'handlers': ['file'],
+            'level': 'INFO',  # Asegúrate de que esto esté en INFO o DEBUG
+            'propagate': True,
+        },
+    },
+}
