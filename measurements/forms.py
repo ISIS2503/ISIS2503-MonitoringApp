@@ -5,17 +5,17 @@ class MeasurementForm(forms.ModelForm):
     class Meta:
         model = Measurement
         fields = [
-            'variable',
-            'value',
-            'unit',
-            'place',
-            #'dateTime',
+            'variable',       # Estudiante
+            'value',          # Precio de matrícula
+            'unit',           # Curso
+            'place',          # Institución o lugar de matrícula
+            #'dateTime',      # Fecha de matrícula (mantener, pero desactivado)
         ]
 
         labels = {
-            'variable' : 'Variable',
-            'value' : 'Value',
-            'unit' : 'Unit',
-            'place' : 'Place',
-            #'dateTime' : 'Date Time',
+            'variable': 'Estudiante',
+            'value': 'Precio de Matrícula',
+            'unit': 'Curso',
+            'place': 'Lugar de Matrícula',
+            #'dateTime': 'Fecha de Matrícula',
         }

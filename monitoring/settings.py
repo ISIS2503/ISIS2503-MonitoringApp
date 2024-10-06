@@ -25,7 +25,7 @@ SECRET_KEY = 'svm_)tpa-o^gkn@81sel&lapq2jc7^^-n9c+4y&f9rymz$kum_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # Permitir acceso solo desde localhost
 
 
 # Application definition
@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'name_db',
-        'USER': 'user_db',
-        'PASSWORD': 'user_password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Usando PostgreSQL
+        'NAME': 'name_db',  # Cambia esto por el nombre de tu base de datos
+        'USER': 'user_db',  # Cambia esto por tu usuario de PostgreSQL
+        'PASSWORD': 'user_password',  # Cambia esto por tu contraseña de PostgreSQL
+        'HOST': 'localhost',  # Mantener localhost
+        'PORT': '5432',  # Puerto por defecto para PostgreSQL
     }
 }
 
@@ -127,7 +127,6 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
-#MEDIA_URL = '/static/media/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (

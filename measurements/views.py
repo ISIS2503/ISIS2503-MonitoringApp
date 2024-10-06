@@ -6,7 +6,7 @@ from django.urls import reverse
 from .logic.logic_measurement import create_measurement, get_measurements
 
 def measurement_list(request):
-    measurements = get_measurements()
+    measurements = get_measurements()  # Lista de matrículas
     context = {
         'measurement_list': measurements
     }
@@ -16,8 +16,8 @@ def measurement_create(request):
     if request.method == 'POST':
         form = MeasurementForm(request.POST)
         if form.is_valid():
-            create_measurement(form)
-            messages.add_message(request, messages.SUCCESS, 'Measurement create successful')
+            create_measurement(form)  # Crear matrícula
+            messages.add_message(request, messages.SUCCESS, 'Matrícula creada exitosamente')
             return HttpResponseRedirect(reverse('measurementCreate'))
         else:
             print(form.errors)
