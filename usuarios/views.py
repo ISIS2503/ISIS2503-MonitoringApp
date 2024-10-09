@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import UsuarioForm 
 from .logic.usuario_logic import get_usuarios, create_usuario 
+
 def usuario_list(request):  
     usuarios = get_usuarios()  
     context = {

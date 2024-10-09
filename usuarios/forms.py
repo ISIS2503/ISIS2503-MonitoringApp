@@ -6,9 +6,13 @@ class UsuarioForm(forms.ModelForm):
         model = Usuario
         fields = [
             'nombre', 
-            'edad',    
+            'edad',
+            'correo',
+            'contrasena'
         ]
         labels = {
             'nombre': 'Nombre',  
-            'edad': 'Edad',      
+            'edad': 'Edad',    
+            'correo': 'Correo',
+            'contrasena': 'Contrasena'
         }
