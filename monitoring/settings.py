@@ -155,7 +155,7 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'INFO',  # Puedes cambiar a DEBUG si quieres más información
+            'level': 'DEBUG', 
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/request_timing.log'),  # Asegúrate de que la ruta sea correcta
             'formatter': 'verbose',
@@ -164,7 +164,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
         # Logger específico para tu middleware
