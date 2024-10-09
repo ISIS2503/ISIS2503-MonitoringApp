@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="content">
+    <div class="">
+        <div class="page-header-title">
+            <h4 class="page-title">Reporte de {{ usuario.nombre }}</h4>
+        </div>
+    </div>
+    <br>
+
+    <ul>
+        <li><strong>Nombre:</strong> {{ usuario.nombre }}</li>
+        <li><strong>Edad:</strong> {{ usuario.edad }}</li>
+        <li><strong>Correo:</strong> {{ usuario.correo }}</li>
+        <li><strong>Saldo Total:</strong> {{ usuario.saldoTotal }}</li>
+        <li><strong>Saldo Deber:</strong> {{ usuario.saldoDeber }}</li>
+    </ul>
+
+    <br>
+
+    <div style="text-align:center;">
+        <button type="button" class="btn btn-primary waves-effect waves-light"
+                onClick=" window.location.href='/reportes' ">
+            Back
+        </button>
+    </div>
+
+</div>
+
+{% endblock %}

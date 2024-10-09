@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="content">
+    <div class="">
+        <div class="page-header-title">
+            <h4 class="page-title">Reporte</h4>
+        </div>
+    </div>
+    <br>
+
+    <form method="GET" action="{% url 'reporte_usuario' %}">
+        <label for="correo">Ingresa el correo electrónico del usuario:</label>
+        <input type="email" id="correo" name="correo" required>
+        <button type="submit">Generar Reporte</button>
+    </form>
+
+    <br>
+
+    <div style="text-align:center;">
+        <button type="button" class="btn btn-primary waves-effect waves-light"
+                onClick=" window.location.href='/' ">
+            Back
+        </button>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="content">
+    <div class="">
+        <div class="page-header-title">
+            <h4 class="page-title">Usuario No Encontrado</h4>
+        </div>
+    </div>
+    <br>
+
+    <body>
+        <p>Lo sentimos, el usuario que buscas no existe en nuestra base de datos.</p>
+    </body>
+
+    <br>
+
+    <div style="text-align:center;">
+        <button type="button" class="btn btn-primary waves-effect waves-light"
+                onClick=" window.location.href='/reportes' ">
+            Back
+        </button>
+    </div>
+
+</div>
+
+{% endblock %}
