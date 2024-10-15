@@ -7,7 +7,7 @@ class Usuario(models.Model):
     correo = models.CharField(max_length=50,default='correo@gmail.com')
     contrasena = models.CharField(max_length=50,default='1234')
     tipoUsuario = models.CharField(max_length=50,default='estudiante')
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return '{} ({})'.format(self.nombre, self.edad)
