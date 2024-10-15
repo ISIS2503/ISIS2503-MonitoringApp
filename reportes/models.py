@@ -4,8 +4,8 @@ from usuarios.models import Usuario
 class Reporte(models.Model):
     nombre = models.CharField(max_length=50)
     id_estudiante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    fecha_emision = models.DateField(null=True)
-    fecha_vencimiento = models.DateField(null=True,auto_now_add=True)
+    fecha_emision = models.DateField(auto_now_add=True)
+    fecha_vencimiento = models.DateField(null=True)
     concepto_pago = models.CharField(max_length=50)
     valor_pagado = models.IntegerField(default=0)
     pagado = models.BooleanField(default=False)
