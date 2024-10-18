@@ -78,14 +78,11 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME' :'monitoring_db',
-        'USER': 'monitoring_user',
-        'PASSWORD': 'isis2503',
-        'HOST': '10.128.0.2',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR + 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
