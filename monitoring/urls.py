@@ -22,5 +22,7 @@ urlpatterns = [
     path('', views.index),
     path('', include('usuarios.urls')),
     path('', include('reportes.urls')),
-    path('', include('facturas.urls'))
+    path('', include('facturas.urls')),
+    path('', views.inicio, name='inicio')
+    
 ]

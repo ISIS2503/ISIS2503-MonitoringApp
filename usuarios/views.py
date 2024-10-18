@@ -57,7 +57,7 @@ def login_view(request):
 # Vista para cerrar sesión
 def logout_view(request):
     request.session.flush()  # Elimina todos los datos de la sesión
-    return redirect('monitoring')
+    return redirect('inicio')
 
 # Dashboard del administrador (lista de usuarios + reportes)
 def admin_dashboard(request):

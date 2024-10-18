@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+
 {% block content %}
 
 <div class="content">
@@ -19,7 +19,7 @@
 
     <div style="text-align:center;">
         <button type="button" class="btn btn-primary waves-effect waves-light"
-                onClick=" window.location.href='/' ">
+        onClick=" window.location.href='{% url 'user_reports' %}' ">
             Back
         </button>
     </div>

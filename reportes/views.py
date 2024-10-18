@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from usuarios.models import Usuario
 
 def inicio_reportes(request):
@@ -20,3 +20,6 @@ def reporte_usuario(request):
         return render(request, 'reportes/usuario_no_encontrado.html')
 
 
+def back_view(request):
+    request.session.flush()  # Elimina todos los datos de la sesión
+    return redirect('user_reports')
