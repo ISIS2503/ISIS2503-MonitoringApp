@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Resultados de la búsqueda</h1>
+
+{% if reportes %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Reporte</th>
+            <th>ID Estudiante</th>
+            <th>Fecha Emisión</th>
+            <th>Concepto Pago</th>
+            <th>Valor Pagado</th>
+            <th>Pagado</th>
+            <th>Saldo Pendiente</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reporte in reportes %}
+        <tr>
+            <td>{{ reporte.id }}</td>
+            <td>{{ reporte.id_estudiante }}</td>
+            <td>{{ reporte.fecha_emision }}</td>
+            <td>{{ reporte.concepto_pago }}</td>
+            <td>{{ reporte.valor_pagado }}</td>
+            <td>{{ reporte.pagado }}</td>
+            <td>{{ reporte.saldo_pendiente }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div></div>
+
+<form method="GET" action="">
+    <input type="hidden" name="download_pdf" value="1">
+    <button type="submit">Descargar PDF</button>
+</form>
+
+{% else %}
+<p>No se encontraron reportes para los criterios de búsqueda ingresados.</p>
+{% endif %}
+
+<div style="text-align:center;">
+    <button type="button" class="btn btn-primary waves-effect waves-light"
+            onClick=" window.location.href='/facturas' ">
+        Back
+    </button>
+</div>
+
+{% endblock %}

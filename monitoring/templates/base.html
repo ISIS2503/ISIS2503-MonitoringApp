@@ -1,53 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% block head %}
-        <title>ISIS2503</title>
-        {% endblock %}
-    </head>
-    <body>
-        <br>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-            <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="/">
-                <img src="/static/media/logo.png" width="45" height="45" alt="">
-                </a>
-            </nav>
-
-          <nav class="navbar navbar-light bg-light">
-              <a class="navbar-brand" href="/">
-                  Ofipensiones
-              </a>
-          </nav>
-
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/usuarios/">Usuarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/reportes/">Reportes</a>
-                </li>
-            </ul>
-
-          </div>
-        </nav>
-
-
-        <main> 
-          <div class="container" style="min-height: 580px;">
-          {% block content %} 
-          {% endblock %} 
-          </div>
-        </main> 
-
-    </body>
-
-   
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofipensiones</title>
+</head>
+<body>
+    <!-- Comprobación de autenticación de usuario -->
+    {% if request.session.usuario_id %}
+        <p>Bienvenido, {{ request.session.usuario_id }}!</p>
+        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+    {% else %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="correo">Email:</label>
+            <input type="email" name="correo" required>
+            
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" name="contrasena" required>
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <a href="{% url 'usuarioCreate' %}">Registrarse</a>
+    {% endif %}
+    
+    <!-- Aquí se renderizará el contenido específico de cada página -->
+    {% block content %}
+    {% endblock %}
+</body>
 </html>

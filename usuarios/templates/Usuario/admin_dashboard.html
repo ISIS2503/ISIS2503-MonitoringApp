@@ -1,0 +1,17 @@
+<h1>Admin Dashboard</h1>
+
+<h2>Lista de Usuarios</h2>
+<ul>
+  {% for usuario in usuarios %}
+    <li>{{ usuario.nombre }} - {{ usuario.tipoUsuario }}</li>
+  {% endfor %}
+</ul>
+
+<h2>Reportes</h2>
+<ul>
+  {% for report in reports %}
+    <li>{{ report.title }} - {{ report.details }}</li>
+  {% empty %}
+    <li>No hay reportes disponibles</li>
+  {% endfor %}
+</ul>

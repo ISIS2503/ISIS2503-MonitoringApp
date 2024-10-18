@@ -1,0 +1,9 @@
+<h1>Reportes</h1>
+
+<ul>
+  {% for report in reports %}
+    <li>{{ report.title }} - {{ report.details }}</li>
+  {% empty %}
+    <li>No hay reportes disponibles</li>
+  {% endfor %}
+</ul>

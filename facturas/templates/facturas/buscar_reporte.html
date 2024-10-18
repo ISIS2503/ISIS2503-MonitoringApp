@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <title>Buscar Reportes</title>
+</head>
+<body>
+    <h1>Buscar Reportes</h1>
+    <form method="GET" action="{% url 'buscar_reportes' %}">
+        <div>
+            {{ form.id_estudiante.label_tag }}<br>
+            {{ form.id_estudiante }}
+        </div>
+        <div>
+            {{ form.fecha_emision.label_tag }}<br>
+            {{ form.fecha_emision }}
+        </div>
+        <div>
+            {{ form.concepto_pago.label_tag }}<br>
+            {{ form.concepto_pago }}
+        </div>
+        <div></div>
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+
+<div style="text-align:center;">
+    <button type="button" class="btn btn-primary waves-effect waves-light"
+            onClick=" window.location.href='/' ">
+        Back
+    </button>
+</div>
+
+{% endblock %}
