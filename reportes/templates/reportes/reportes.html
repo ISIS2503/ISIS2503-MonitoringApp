@@ -1,29 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <style>
+        .navbar-brand img {
+            width: 60px;
+            height: auto;
+        }
+        .navbar {
+            padding: 1rem 2rem;
+        }
+        .content {
+            margin-top: 2rem;
+        }
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .form-label {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .form-control {
+            font-size: 1.15rem;
+            padding: 0.75rem;
+        }
+        .btn-lg {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+        }
+        .btn-primary {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="/static/media/logo.png" alt="Logo">
+        </a>
+        <a class="navbar-brand" href="/">Ofipensiones</a>
+    </nav>
 
 {% block content %}
 
-<div class="content">
-    <div class="">
-        <div class="page-header-title">
-            <h4 class="page-title">Reporte</h4>
-        </div>
+<div class="container content">
+    <div class="page-header-title">
+        <h4 class="page-title">Generar Reporte</h4>
     </div>
-    <br>
 
     <form method="GET" action="{% url 'reporte_usuario' %}">
-        <label for="correo">Ingresa el correo electrónico del usuario:</label>
-        <input type="email" id="correo" name="correo" required>
-        <button type="submit">Generar Reporte</button>
+        <div class="form-group">
+            <label for="correo" class="form-label">Ingresa el correo electrónico del usuario:</label>
+            <input type="email" id="correo" name="correo" class="form-control" placeholder="usuario@correo.com" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Generar Reporte</button>
     </form>
 
-    <br>
-
-    <div style="text-align:center;">
-        <button type="button" class="btn btn-primary waves-effect waves-light"
-        onClick=" window.location.href='{% url 'user_reports' %}' ">
-            Back
+    <div class="text-center">
+        <button type="button" class="btn btn-secondary btn-lg mt-4"
+                onClick="window.location.href='/'">
+            Volver
         </button>
     </div>
-
 </div>
 
 {% endblock %}
+
+</body>
+</html>

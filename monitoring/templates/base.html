@@ -1,31 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <!-- Meta tags para la visualización en dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofipensiones</title>
+    
+    <!-- Título de la página -->
+    {% block head %}
+    <title>ISIS2503 - Ofipensiones</title>
+    {% endblock %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <style>
+        .navbar-brand img {
+            width: 60px;
+            height: auto;
+        }
+        .navbar {
+            padding: 1rem 2rem;
+        }
+        .form-inline .form-control {
+            margin-right: 10px;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .welcome-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
-    <!-- Comprobación de autenticación de usuario -->
-    {% if request.session.usuario_id %}
-        <p>Bienvenido, {{ request.session.usuario_id }}!</p>
-        <a href="{% url 'logout' %}">Cerrar Sesión</a>
-    {% else %}
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            <label for="correo">Email:</label>
-            <input type="email" name="correo" required>
-            
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" name="contrasena" required>
-            
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <a href="{% url 'usuarioCreate' %}">Registrarse</a>
-    {% endif %}
-    
-    <!-- Aquí se renderizará el contenido específico de cada página -->
-    {% block content %}
-    {% endblock %}
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">
+            <img src="/static/media/logo.png" alt="Logo">
+        </a>
+
+        <!-- Título de la página -->
+        <a class="navbar-brand" href="/">
+            Ofipensiones
+        </a>
+
+        <!-- Autenticación -->
+        <div class="ml-auto">
+            {% if request.session.usuario_id %}
+                <p class="welcome-text d-inline">Bienvenido, {{ request.session.usuario_id }}!</p>
+                <a href="{% url 'logout' %}" class="btn btn-outline-secondary">Cerrar Sesión</a>
+            {% else %}
+                <form method="POST" action="{% url 'login' %}" class="form-inline">
+                    {% csrf_token %}
+                    <input type="email" name="correo" class="form-control" placeholder="Email" required>
+                    <input type="password" name="contrasena" class="form-control" placeholder="Contraseña" required>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </form>
+                <a href="{% url 'usuarioCreate' %}" class="btn btn-link ml-2">Registrarse</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        {% block content %}
+        <!-- Aquí va el contenido específico de cada página -->
+        {% endblock %}
+    </div>
+
 </body>
 </html>
