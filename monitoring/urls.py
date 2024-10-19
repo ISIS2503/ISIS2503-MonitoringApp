@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('measurements.urls')),
     path('', include('variables.urls')),
     path('monitor/logs/', log_monitor, name='log_monitor'),
+    path('cronogramas/', include('cronogramas.urls')),
 ]

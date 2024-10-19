@@ -6,4 +6,5 @@ from . import views
 urlpatterns = [
     path('variables/', views.variable_list, name='variableList'),
     path('variablecreate/', csrf_exempt(views.variable_create), name='variableCreate'),
+    path('variables/morosos', views.morosos_list, name='lista_morosos'),
 ]
