@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'usuarios',
     'reportes',
     'cursos',
+    'facturas'
 ]
 
 MIDDLEWARE = [
@@ -57,10 +58,7 @@ ROOT_URLCONF = 'monitoring.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            # Asegúrate de que esta ruta apunte al directorio correcto
-            os.path.join(BASE_DIR, 'monitoring/templates'),
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'monitoring/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
