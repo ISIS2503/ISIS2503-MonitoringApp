@@ -69,3 +69,7 @@ def admin_dashboard(request):
 def user_reports(request):
     reports = []  # Lógica para obtener reportes (puedes agregar aquí la lógica real)
     return render(request, 'user_reports.html', {'reports': reports})
+
+def back_view(request):
+    request.session.flush()  # Elimina todos los datos de la sesión
+    return redirect('admin_dashboard')

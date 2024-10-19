@@ -13,6 +13,11 @@ from reportlab.platypus import Table, TableStyle
 
 def buscar_reportes(request):
     form = FiltroReporteForm(request.GET or None)
+
+    # Capturar la URL anterior (referer) o usar '/admin_dashboard/' por defecto si no existe
+    referer = request.META.get('HTTP_REFERER', '/admin_dashboard/')
+    request.session['previous_page'] = referer  # Guardar en la sesión
+
     if form.is_valid():
         id_estudiante = form.cleaned_data['id_estudiante']
         fecha_emision = form.cleaned_data['fecha_emision']
@@ -20,8 +25,7 @@ def buscar_reportes(request):
 
         return redirect('generar_pdf', id_estudiante=id_estudiante, fecha_emision=fecha_emision, concepto_pago=concepto_pago)
 
-    return render(request, 'facturas/buscar_reportes.html', {'form': form})
-
+    return render(request, 'facturas/buscar_reportes.html', {'form': form, 'previous_page': referer})
 
 def generar_pdf(request, id_estudiante, fecha_emision, concepto_pago):
     reportes = Reporte.objects.filter(
