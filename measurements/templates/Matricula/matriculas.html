@@ -15,19 +15,19 @@
         </tr>
         </thead>
         <tbody>
-        {% for measurement in measurement_list %}
+        {% for matricula in matricula_list %}
         <tr>
-            <td>{{ measurement.variable.name }}</td>
-            <td>{{ measurement.value }}</td>
-            <td>{{ measurement.unit }}</td>
-            <td>{{ measurement.place }}</td>
-            <td>{{ measurement.extra_payment }}</td>
-            <td>{{ measurement.dateTime }}</td>
+            <td>{{ matricula.variable.name }}</td>
+            <td>{{ matricula.value }}</td>
+            <td>{{ matricula.unit }}</td>
+            <td>{{ matricula.place }}</td>
+            <td>{{ matricula.extra_payment }}</td>
+            <td>{{ matricula.dateTime }}</td>
           
         </tr>
         {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'measurement_create' %}" class="btn btn-success">Agregar Matrícula</a>
+    <a href="{% url 'matricula_create' %}" class="btn btn-success">Agregar Matrícula</a>
 </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class MeasurementsConfig(AppConfig):
+class MatriculasConfig(AppConfig):
     name = 'measurements'

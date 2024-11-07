@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Variable  # Asegúrate de importar el modelo Variable
-from measurements.models import Measurement
+from measurements.models import Matricula
 
 from .forms import VariableForm
 from .logic.variable_logic import get_variables, create_variable
@@ -14,7 +14,7 @@ def morosos_list(request):
 
     # Obtener la lista de estudiantes y sus cuentas
     estudiantes = Variable.objects.all()
-    cuentas = Measurement.objects.all()
+    cuentas = Matricula.objects.all()
 
     # Lista para almacenar los estudiantes que deben dinero
     morosos = []

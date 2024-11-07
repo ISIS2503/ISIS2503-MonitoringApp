@@ -1,44 +1,45 @@
 from django.shortcuts import render
-from .forms import MeasurementForm
+from .forms import MatriculaForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .logic.logic_measurement import create_measurement, get_measurements, delete_measurement
+from .logic.logic_matricula import create_matricula, get_matriculas, delete_matricula
+from measurements.models import Matricula
 
-def measurement_list(request):
-    measurements = get_measurements()  # Lista de matrículas
+def matricula_list(request):
+    matriculas = get_matriculas()  # Lista de matrículas
     context = {
-        'measurement_list': measurements
+        'matricula_list': matriculas
     }
-    return render(request, 'Measurement/measurements.html', context)
+    return render(request, 'Matricula/matriculas.html', context)
 
-def measurement_create(request):
+def matricula_create(request):
     if request.method == 'POST':
-        form = MeasurementForm(request.POST)
+        form = MatriculaForm(request.POST)
         if form.is_valid():
-            create_measurement(form)  # Crear matrícula
+            create_matricula(form)  # Crear matrícula
             messages.add_message(request, messages.SUCCESS, 'Matrícula creada exitosamente')
-            return HttpResponseRedirect(reverse('measurement_list'))
+            return HttpResponseRedirect(reverse('matricula_list'))
         else:
             print(form.errors)
     else:
-        form = MeasurementForm()
+        form = MatriculaForm()
 
     context = {
         'form': form,
     }
 
-    return render(request, 'Measurement/measurementCreate.html', context)
+    return render(request, 'Matricula/matriculaCreate.html', context)
 
-def measurement_delete(request, id):
-    # Obtener el objeto Measurement o devolver un 404 si no existe
-    measurement = get_object_or_404(Measurement, id=id)
+def matricula_delete(request, id):
+    # Obtener el objeto Matricula o devolver un 404 si no existe
+    matricula = get_object_or_404(Matricula, id=id)
     
     # Eliminar la medición
-    measurement.delete()
+    matricula.delete()
     
     # Mostrar un mensaje de éxito
     messages.success(request, 'La matrícula fue eliminada exitosamente.')
     
     # Redirigir a la lista de mediciones (o cualquier otra vista)
-    return redirect('measurement_list')  # 'measurementList' debe ser el nombre de la URL donde se redirige
+    return redirect('matricula_list')  # 'matriculaList' debe ser el nombre de la URL donde se redirige
