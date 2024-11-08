@@ -1,9 +1,9 @@
 from django import forms
-from .models import Variable
+from .models import Estudiante
 
-class VariableForm(forms.ModelForm):
+class EstudianteForm(forms.ModelForm):
     class Meta:
-        model = Variable
+        model = Estudiante
         fields = [
             'name',
             'birth_date',  # Fecha de nacimiento

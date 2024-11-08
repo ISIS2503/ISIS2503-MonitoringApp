@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class VariablesConfig(AppConfig):
+class EstudiantesConfig(AppConfig):
     name = 'variables'

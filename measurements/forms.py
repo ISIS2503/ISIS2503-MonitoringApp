@@ -5,7 +5,7 @@ class MatriculaForm(forms.ModelForm):
     class Meta:
         model = Matricula
         fields = [
-            'variable',       # Estudiante
+            'estudiante',       # Estudiante
             'value',          # Precio de matrícula
             'unit',           # Curso
             'place',          # Institución o lugar de matrícula
@@ -13,7 +13,7 @@ class MatriculaForm(forms.ModelForm):
         ]
 
         labels = {
-            'variable': 'Estudiante',
+            'estudiante': 'Estudiante',
             'value': 'Precio de Matrícula',
             'unit': 'Curso',
             'place': 'Lugar de Matrícula',

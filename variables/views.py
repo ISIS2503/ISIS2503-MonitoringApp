@@ -2,18 +2,18 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Variable  # Asegúrate de importar el modelo Variable
+from .models import Estudiante  # Asegúrate de importar el modelo Estudiante
 from measurements.models import Matricula
 
-from .forms import VariableForm
-from .logic.variable_logic import get_variables, create_variable
+from .forms import EstudianteForm
+from .logic.estudiante_logic import get_estudiantes, create_estudiante
 
 def morosos_list(request):
     # Precio de la matrícula
     precio_matricula = 1000000
 
     # Obtener la lista de estudiantes y sus cuentas
-    estudiantes = Variable.objects.all()
+    estudiantes = Estudiante.objects.all()
     cuentas = Matricula.objects.all()
 
     # Lista para almacenar los estudiantes que deben dinero
@@ -21,7 +21,7 @@ def morosos_list(request):
 
     # Calcular la deuda de cada estudiante
     for estudiante in estudiantes:
-        cuentas_estudiante = cuentas.filter(variable=estudiante)
+        cuentas_estudiante = cuentas.filter(estudiante=estudiante)
         total_pagado = sum(cuenta.value for cuenta in cuentas_estudiante)
         deuda = precio_matricula - total_pagado
 
@@ -35,35 +35,35 @@ def morosos_list(request):
         'morosos': morosos
     }
 
-    return render(request, 'Variable/morosos_list.html', context)
+    return render(request, 'Estudiante/morosos_list.html', context)
 
-def variable_list(request):
+def estudiante_list(request):
     query = request.GET.get('search', '')  # Obtener el término de búsqueda
     if query:
-        variables = Variable.objects.filter(name__icontains=query)  # Filtrar por nombre
+        estudiantes = Estudiante.objects.filter(name__icontains=query)  # Filtrar por nombre
     else:
-        variables = get_variables()  # Obtener todas si no hay búsqueda
+        estudiantes = get_estudiantes()  # Obtener todas si no hay búsqueda
 
     context = {
-        'variable_list': variables,
+        'estudiante_list': estudiantes,
         'search_query': query  # Pasar la consulta al contexto para mantenerla en el formulario
     }
-    return render(request, 'Variable/variables.html', context)
+    return render(request, 'Estudiante/estudiantes.html', context)
 
-def variable_create(request):
+def estudiante_create(request):
     if request.method == 'POST':
-        form = VariableForm(request.POST)
+        form = EstudianteForm(request.POST)
         if form.is_valid():
-            create_variable(form)
-            messages.add_message(request, messages.SUCCESS, 'Successfully created variable')
-            return HttpResponseRedirect(reverse('variableCreate'))
+            create_estudiante(form)
+            messages.add_message(request, messages.SUCCESS, 'Successfully created estudiante')
+            return HttpResponseRedirect(reverse('estudianteCreate'))
         else:
             print(form.errors)
     else:
-        form = VariableForm()
+        form = EstudianteForm()
 
     context = {
         'form': form,
     }
-    return render(request, 'Variable/variableCreate.html', context)
+    return render(request, 'Estudiante/estudianteCreate.html', context)
 

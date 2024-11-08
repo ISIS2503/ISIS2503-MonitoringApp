@@ -1,6 +1,6 @@
 from django.db import models
 
-class Variable(models.Model):
+class Estudiante(models.Model):
     name = models.CharField(max_length=50)
     birth_date = models.DateField(null=True, blank=True)  # Fecha de nacimiento
     age = models.IntegerField(null=True, blank=True)  # Edad

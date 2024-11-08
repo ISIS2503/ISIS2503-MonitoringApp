@@ -7,7 +7,7 @@
             <h4 class="page-title">Estudiantes</h4>
             <div style="text-align:right;">
                 <button type="button" class="btn btn-success waves-effect waves-light"
-                        onClick="window.location.href='/variablecreate'" style="text-align:center;">+
+                        onClick="window.location.href='/estudiantecreate'" style="text-align:center;">+
                 </button>
             </div>
         </div>
@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
 
-                        {% for estudiante in variable_list %}
+                        {% for estudiante in estudiante_list %}
                         <tr>
                             <td>{{ estudiante.name }}</td>
                         </tr>

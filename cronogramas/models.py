@@ -1,10 +1,10 @@
 from django.db import models
-from variables.models import Variable  # Estudiante
+from variables.models import Estudiante  # Estudiante
 import json
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=100)
-    estudiantes = models.ManyToManyField(Variable, related_name='cursos')  # Reemplazamos 'Estudiante' por 'Variable'
+    estudiantes = models.ManyToManyField(Estudiante, related_name='cursos')  # Reemplazamos 'Estudiante' por 'Estudiante'
 
     def _str_(self):
         return self.nombre
