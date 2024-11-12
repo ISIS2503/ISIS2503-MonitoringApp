@@ -6,5 +6,6 @@ class Estudiante(models.Model):
     age = models.IntegerField(null=True, blank=True)  # Edad
     course = models.CharField(max_length=100, null=True, blank=True)  # Curso
 
+
     def __str__(self):
         return f'{self.name} ({self.age} años)'

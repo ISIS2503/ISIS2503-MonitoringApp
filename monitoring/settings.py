@@ -24,9 +24,7 @@ SECRET_KEY = 'svm_)tpa-o^gkn@81sel&lapq2jc7^^-n9c+4y&f9rymz$kum_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '34.66.251.79']  # Permitir acceso solo desde localhost
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
     'measurements',
     'variables',
     'cronogramas',
+    #'social_django',
 ]
 
 MIDDLEWARE = [
@@ -186,3 +185,12 @@ LOGGING = {
     },
 }
 
+LOGIN_URL = "/login/auth0"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL ="https://dominio_auth0_tenant.auth0.com/v2/logout?returnTo=http%3A%2F%2Fip_publica_instancia:8080"
+SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'dominio_auth0_tenant.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = 'W8g5KLG4s2ogftLqVDrGwd3xD7JafO0S'
+SOCIAL_AUTH_AUTH0_SECRET = '7MVp47TDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+SOCIAL_AUTH_AUTH0_SCOPE = ['openid','profile','email','role',]
+AUTHENTICATION_BACKENDS = {'monitoring.auth0backend.Auth0','django.contrib.auth.backends.ModelBackend',}

@@ -5,7 +5,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .logic.logic_matricula import create_matricula, get_matriculas, delete_matricula
 from measurements.models import Matricula
+from django.contrib.auth.decorators import login_required
 
+#@login_required
 def matricula_list(request):
     matriculas = get_matriculas()  # Lista de matrículas
     context = {

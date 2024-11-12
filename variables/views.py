@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Estudiante  # Asegúrate de importar el modelo Estudiante
 from measurements.models import Matricula
+from django.contrib.auth.decorators import login_required
 
 from .forms import EstudianteForm
 from .logic.estudiante_logic import get_estudiantes, create_estudiante
