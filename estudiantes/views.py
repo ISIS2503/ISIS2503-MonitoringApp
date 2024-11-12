@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Estudiante  # Asegúrate de importar el modelo Estudiante
-from measurements.models import Matricula
+from matriculas.models import Matricula
 from django.contrib.auth.decorators import login_required
 
 from .forms import EstudianteForm

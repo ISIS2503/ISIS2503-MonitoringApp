@@ -1,4 +1,4 @@
-"""monitoring URL Configuration
+"""sistema URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -21,8 +21,8 @@ from .views import log_monitor
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('', include('measurements.urls')),
-    path('', include('variables.urls')),
+    path('', include('matriculas.urls')),
+    path('', include('estudiantes.urls')),
     path('monitor/logs/', log_monitor, name='log_monitor'),
     path('cronogramas/', include('cronogramas.urls')),
 ]

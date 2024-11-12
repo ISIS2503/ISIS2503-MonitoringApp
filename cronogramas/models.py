@@ -1,5 +1,5 @@
 from django.db import models
-from variables.models import Estudiante  # Estudiante
+from estudiantes.models import Estudiante  # Estudiante
 import json
 
 class Curso(models.Model):
