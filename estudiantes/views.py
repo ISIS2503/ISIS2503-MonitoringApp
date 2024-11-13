@@ -9,6 +9,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import EstudianteForm
 from .logic.estudiante_logic import get_estudiantes, create_estudiante
 
+
+### PONER LOS USUARIOS AUTORIZADOS
+#@login_required
+
 def morosos_list(request):
     # Precio de la matrícula
     precio_matricula = 1000000
@@ -38,6 +42,7 @@ def morosos_list(request):
 
     return render(request, 'Estudiante/morosos_list.html', context)
 
+#@login_required
 def estudiante_list(request):
     query = request.GET.get('search', '')  # Obtener el término de búsqueda
     if query:
