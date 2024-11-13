@@ -1,0 +1,14 @@
+resources:
+  # Aquí puedes definir los recursos, como instancias de VM, bases de datos, etc.
+  # Ejemplo de un recurso básico:
+  - name: example-instance
+    type: compute.v1.instance
+    properties:
+      zone: us-central1-a
+      machineType: zones/us-central1-a/machineTypes/f1-micro
+      disks:
+      - deviceName: boot
+        type: PERSISTENT
+        boot: true
+        initializeParams:
+          sourceImage: projects/debian-cloud/global/images/family/debian-9
