@@ -189,10 +189,24 @@ LOGGING = {
 
 LOGIN_URL = "/login/auth0"
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL ="https://dominio_auth0_tenant.auth0.com/v2/logout?returnTo=http%3A%2F%2Fip_publica_instancia:8080"
-SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = 'dominio_auth0_tenant.auth0.com'
-SOCIAL_AUTH_AUTH0_KEY = 'W8g5KLG4s2ogftLqVDrGwd3xD7JafO0S'
-SOCIAL_AUTH_AUTH0_SECRET = '7MVp47TDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-SOCIAL_AUTH_AUTH0_SCOPE = ['openid','profile','email','role',]
-AUTHENTICATION_BACKENDS = {'sistema.auth0backend.Auth0','django.contrib.auth.backends.ModelBackend',}
+LOGOUT_REDIRECT_URL = "https://dev-atsz0rc44uc2iaim.us.auth0.com/v2/logout?returnTo=http%3A%2F%2F34.31.231.118%3A8080&client_id=MBMQrFBFWZay2QRloXWCiMjZ1FW6gIBu"
+
+SOCIAL_AUTH_TRAILING_SLASH = False  # Remove end slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-atsz0rc44uc2iaim.us.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = 'MBMQrFBFWZay2QRloXWCiMjZ1FW6gIBu'  # Client ID
+SOCIAL_AUTH_AUTH0_SECRET = 'KKR11wIKMisNOe-5Y5265fD85nTTbv2swYwE87wVF-X6NbLs1Rj5J8hpAH4Xqtzr'  # Client Secret
+SOCIAL_AUTH_AUTH0_SCOPE = ['openid', 'profile', 'email', 'role']
+
+AUTHENTICATION_BACKENDS = (
+    'sistema.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jfrc72@gmail.com'
+EMAIL_HOST_PASSWORD = 'qtxs juwe stsz suqh'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
