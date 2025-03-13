@@ -3,7 +3,7 @@ name: Deploy to Google Cloud
 on:
   push:
     branches:
-      - master  # O el nombre de tu rama principal
+      - master
 
 env:
   PROJECT_ID: arquisoft-453601
@@ -13,11 +13,7 @@ env:
 
 jobs:
   deploy:
-    name: Deploy with Cloud Build
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
 
     steps:
       - name: Checkout
@@ -27,12 +23,14 @@ jobs:
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: projects/${{ env.PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github
-          service_account: github-actions-sa@arquisoft-453601.iam.gserviceaccount.com
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
       # Configurar Google Cloud SDK
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
+        with:
+          version: 'latest'
+          project_id: ${{ env.PROJECT_ID }}
 
       # Crear Artifact Registry si no existe
       - name: Create Artifact Repository if needed
@@ -53,6 +51,7 @@ jobs:
       # Ejecutar migraciones usando el proxy de Cloud SQL como un sidecar
       - name: Apply Django migrations
         run: |
+          echo '${{ secrets.GCP_SA_KEY }}' > /tmp/google-cloud-key.json
           docker run --network="host" \
             -v /tmp:/tmp \
             -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json \
@@ -64,8 +63,3 @@ jobs:
             pip install -r requirements.txt && \
             python manage.py migrate
 
-      # Guardar las credenciales de Google Cloud en un archivo temporal
-      - name: 'Create credentials file'
-        shell: bash
-        run: |
-          echo '${{ secrets.GCP_SA_KEY }}' > /tmp/google-cloud-key.json
