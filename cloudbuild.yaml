@@ -1,0 +1,30 @@
+steps:
+  # Construir la imagen de Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA', '.']
+
+  # Pushear la imagen a Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA']
+
+  # Desplegar en Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'app-medica'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--service-account'
+      - 'app-medica-sa@arquisoft-453601.iam.gserviceaccount.com'
+      - '--set-env-vars'
+      - 'DJANGO_SETTINGS_MODULE=monitoring.settings_prod'
+
+images:
+  - 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA'

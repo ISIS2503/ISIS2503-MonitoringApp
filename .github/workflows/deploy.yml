@@ -1,0 +1,58 @@
+name: Build and Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # O el nombre de tu rama principal
+
+env:
+  PROJECT_ID: arquisoft-453601
+  SERVICE_NAME: app-medica
+  REGION: us-central1
+
+jobs:
+  setup-build-deploy:
+    name: Setup, Build, and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Configurar autenticación con Google Cloud
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    # Configurar Google Cloud SDK
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+
+    # Configurar Docker para usar gcloud como credencial helper
+    - name: Configure Docker
+      run: |
+        gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+    # Construir la imagen de Docker
+    - name: Build
+      run: |
+        docker build -t us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/docker-repo/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+
+    # Publicar la imagen en Artifact Registry
+    - name: Push
+      run: |
+        docker push us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/docker-repo/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+    # Desplegar en Cloud Run
+    - name: Deploy
+      run: |
+        gcloud run deploy ${{ env.SERVICE_NAME }} \
+          --image us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/docker-repo/${{ env.SERVICE_NAME }}:${{ github.sha }} \
+          --platform managed \
+          --region ${{ env.REGION }} \
+          --allow-unauthenticated \
+          --set-env-vars="DJANGO_SETTINGS_MODULE=monitoring.settings_prod"
