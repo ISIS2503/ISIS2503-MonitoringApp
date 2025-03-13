@@ -62,5 +62,5 @@ jobs:
         env:
           DJANGO_SETTINGS_MODULE: monitoring.settings_prod
         run: |
-          chmod +x scripts/run_migrations.sh  # Asegúrate de que la ruta sea correcta
+          chmod +x scripts/run_migrations.sh 
           ./scripts/run_migrations.sh
