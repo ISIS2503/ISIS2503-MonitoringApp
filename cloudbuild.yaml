@@ -1,11 +1,25 @@
 steps:
+  # Instalar dependencias y preparar entorno
+  - name: 'python:3.9'
+    entrypoint: pip
+    args: ['install', '-r', 'requirements.txt', '--user']
+
+  # Ejecutar migraciones contra Cloud SQL
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install -y default-mysql-client
+        ./scripts/run_migrations.sh
+
   # Construir la imagen de Docker
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${SHORT_SHA}', '.']
 
-  # Pushear la imagen a Artifact Registry
+  # Enviar la imagen a Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA']
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${SHORT_SHA}']
 
   # Desplegar en Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -13,18 +27,17 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'app-medica'
-      - '--image'
-      - 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA'
-      - '--region'
-      - 'us-central1'
-      - '--platform'
-      - 'managed'
+      - '${_SERVICE_NAME}'
+      - '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${SHORT_SHA}'
+      - '--region=${_REGION}'
+      - '--platform=managed'
       - '--allow-unauthenticated'
-      - '--service-account'
-      - 'app-medica-sa@arquisoft-453601.iam.gserviceaccount.com'
-      - '--set-env-vars'
-      - 'DJANGO_SETTINGS_MODULE=monitoring.settings_prod'
+      - '--add-cloudsql-instances=${PROJECT_ID}:${_REGION}:django-db-instance'
+      - '--set-env-vars=DJANGO_SETTINGS_MODULE=monitoring.settings_prod'
 
-images:
-  - 'us-central1-docker.pkg.dev/arquisoft-453601/docker-repo/app-medica:$SHORT_SHA'
+substitutions:
+  _SERVICE_NAME: app-medica
+  _REGION: us-central1
+
+options:
+  logging: CLOUD_LOGGING_ONLY

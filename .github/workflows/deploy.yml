@@ -1,4 +1,4 @@
-name: Build and Deploy to Cloud Run
+name: Deploy to Google Cloud
 
 on:
   push:
@@ -11,8 +11,8 @@ env:
   REGION: us-central1
 
 jobs:
-  setup-build-deploy:
-    name: Setup, Build, and Deploy
+  deploy:
+    name: Deploy with Cloud Build
     runs-on: ubuntu-latest
 
     steps:
@@ -29,41 +29,9 @@ jobs:
     # Configurar Google Cloud SDK
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: ${{ env.PROJECT_ID }}
 
-    # Configurar Docker para usar gcloud como credencial helper
-    - name: Configure Docker
+    # Ejecutar Cloud Build
+    - name: Cloud Build
       run: |
-        gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
-
-    # Construir la imagen de Docker
-    - name: Build
-      run: |
-        docker build -t us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/docker-repo/${{ env.SERVICE_NAME }}:${{ github.sha }} .
-
-    # Publicar la imagen en Artifact Registry
-    - name: Push
-      run: |
-        docker push us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/docker-repo/${{ env.SERVICE_NAME }}:${{ github.sha }}
-
-    # Desplegar en Cloud Run
-    - name: Deploy
-      run: |
-        gcloud run deploy ${{ env.SERVICE_NAME }} \
-          --image us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/docker-repo/${{ env.SERVICE_NAME }}:${{ github.sha }} \
-          --platform managed \
-          --region ${{ env.REGION }} \
-          --allow-unauthenticated \
-          --set-env-vars="DJANGO_SETTINGS_MODULE=monitoring.settings_prod"
-
-    - id: 'sql-proxy'
-      uses: 'google-github-actions/sql-proxy@v1'
-      with:
-        instance: 'arquisoft-453601:us-central1:django-db-instance'
-        port: 5432
-
-    # Aplicar migraciones
-    - name: 'Apply Django migrations'
-      run: |
-        python manage.py migrate --settings=tu_proyecto.settings_prod
+        gcloud builds submit --config=cloudbuild.yaml \
+          --substitutions=_SERVICE_NAME=${{ env.SERVICE_NAME }},_REGION=${{ env.REGION }} .

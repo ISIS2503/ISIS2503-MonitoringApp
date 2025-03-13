@@ -24,16 +24,32 @@ SECRET_KEY = access_secret_version("django-secret-key") or SECRET_KEY
 ALLOWED_HOSTS = ['*']
 
 # Configuración de PostgreSQL para Cloud SQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': access_secret_version("db-name"),
-        'USER': access_secret_version("db-user"),
-        'PASSWORD': access_secret_version("db-password"),
-        'HOST': access_secret_version("db-host"),
-        'PORT': '5432',
+# Configuración para conexiones a Cloud SQL en producción
+if os.environ.get('K_SERVICE'):  # Estamos en Cloud Run
+    # Usar socket para conectarse a Cloud SQL
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': access_secret_version("db-name"),
+            'USER': access_secret_version("db-user"),
+            'PASSWORD': access_secret_version("db-password"),
+            'HOST': f"/cloudsql/{access_secret_version('db-instance')}",
+            'PORT': '',
+        }
     }
-}
+else:
+    # Desarrollo local con Cloud SQL Proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': access_secret_version("db-name"),
+            'USER': access_secret_version("db-user"),
+            'PASSWORD': access_secret_version("db-password"),
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+
 
 # Para conexiones a través de unix socket en Cloud Run
 if os.environ.get('GAE_APPLICATION'):
