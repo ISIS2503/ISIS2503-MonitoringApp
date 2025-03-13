@@ -9,29 +9,63 @@ env:
   PROJECT_ID: arquisoft-453601
   SERVICE_NAME: app-medica
   REGION: us-central1
+  CLOUD_SQL_INSTANCE: arquisoft-453601:us-central1:django-db-instance
 
 jobs:
   deploy:
     name: Deploy with Cloud Build
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    # Configurar autenticación con Google Cloud
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+      # Autenticación con Google Cloud
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: projects/${{ env.PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github
+          service_account: github-actions-sa@arquisoft-453601.iam.gserviceaccount.com
 
-    # Configurar Google Cloud SDK
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
+      # Configurar Google Cloud SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
 
-    # Ejecutar Cloud Build
-    - name: Cloud Build
-      run: |
-        gcloud builds submit --config=cloudbuild.yaml \
-          --substitutions=_SERVICE_NAME=${{ env.SERVICE_NAME }},_REGION=${{ env.REGION }} .
+      # Crear Artifact Registry si no existe
+      - name: Create Artifact Repository if needed
+        run: |
+          if ! gcloud artifacts repositories describe docker-repo --location=${{ env.REGION }} 2>/dev/null; then
+            gcloud artifacts repositories create docker-repo \
+              --repository-format=docker \
+              --location=${{ env.REGION }} \
+              --description="Docker repository"
+          fi
+
+      # Ejecutar Cloud Build
+      - name: Cloud Build
+        run: |
+          gcloud builds submit --config=cloudbuild.yaml \
+            --substitutions=_SERVICE_NAME=${{ env.SERVICE_NAME }},_REGION=${{ env.REGION }} .
+
+      # Ejecutar migraciones usando el proxy de Cloud SQL como un sidecar
+      - name: Apply Django migrations
+        run: |
+          docker run --network="host" \
+            -v /tmp:/tmp \
+            -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json \
+            -e CLOUD_SQL_CONNECTION_NAME=${{ env.CLOUD_SQL_INSTANCE }} \
+            -e DJANGO_SETTINGS_MODULE=monitoring.settings_prod \
+            gcr.io/cloudsql-docker/cloud-sql-proxy:1.33 \
+            /cloud_sql_proxy -instances=${{ env.CLOUD_SQL_INSTANCE }}=tcp:5432 & \
+            sleep 10 && \
+            pip install -r requirements.txt && \
+            python manage.py migrate
+
+      # Guardar las credenciales de Google Cloud en un archivo temporal
+      - name: 'Create credentials file'
+        shell: bash
+        run: |
+          echo '${{ secrets.GCP_SA_KEY }}' > /tmp/google-cloud-key.json

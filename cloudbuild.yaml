@@ -1,33 +1,4 @@
 steps:
-  # Instalar dependencias y preparar entorno
-  - name: 'python:3.9'
-    entrypoint: pip
-    args: ['install', '-r', 'requirements.txt', '--user']
-
-  # Crear script de migraciones durante la compilación
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        # Crear el script de migraciones directamente
-        cat > run_migrations.sh << 'EOF'
-        #!/bin/bash
-        set -e
-
-        echo "Instalando dependencias para migraciones..."
-        pip install psycopg2-binary google-cloud-secret-manager django
-
-        echo "Ejecutando migraciones..."
-        DJANGO_SETTINGS_MODULE=monitoring.settings_prod python manage.py migrate
-        EOF
-
-        # Hacer el script ejecutable
-        chmod +x run_migrations.sh
-
-        # Ejecutar el script
-        ./run_migrations.sh
-
   # Construir la imagen de Docker
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${SHORT_SHA}', '.']
