@@ -58,8 +58,9 @@ jobs:
           netstat -tuln | grep 5432
 
       # Aplicar migraciones
-      - name: Apply migrations
+      - name: Make and apply migrations
         env:
           DJANGO_SETTINGS_MODULE: monitoring.settings_prod
         run: |
-          python manage.py migrate
+          chmod +x run_migrations.sh
+          ./run_migrations.sh
