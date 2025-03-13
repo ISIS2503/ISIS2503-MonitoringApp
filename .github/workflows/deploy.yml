@@ -3,7 +3,7 @@ name: Build and Deploy to Cloud Run
 on:
   push:
     branches:
-      - main  # O el nombre de tu rama principal
+      - master  # O el nombre de tu rama principal
 
 env:
   PROJECT_ID: arquisoft-453601
