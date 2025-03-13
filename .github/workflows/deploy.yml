@@ -9,7 +9,6 @@ env:
   PROJECT_ID: arquisoft-453601
   SERVICE_NAME: app-medica
   REGION: us-central1
-  CLOUD_SQL_INSTANCE: arquisoft-453601:us-central1:django-db-instance
 
 jobs:
   deploy:
@@ -28,38 +27,39 @@ jobs:
       # Configurar Google Cloud SDK
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
-        with:
-          version: 'latest'
-          project_id: ${{ env.PROJECT_ID }}
 
-      # Crear Artifact Registry si no existe
-      - name: Create Artifact Repository if needed
-        run: |
-          if ! gcloud artifacts repositories describe docker-repo --location=${{ env.REGION }} 2>/dev/null; then
-            gcloud artifacts repositories create docker-repo \
-              --repository-format=docker \
-              --location=${{ env.REGION }} \
-              --description="Docker repository"
-          fi
-
-      # Ejecutar Cloud Build
+      # Cloud Build para construir y desplegar la imagen
       - name: Cloud Build
         run: |
-          gcloud builds submit --config=cloudbuild.yaml \
-            --substitutions=_SERVICE_NAME=${{ env.SERVICE_NAME }},_REGION=${{ env.REGION }} .
+          gcloud builds submit --config=cloudbuild.yaml
 
-      # Ejecutar migraciones usando el proxy de Cloud SQL como un sidecar
-      - name: Apply Django migrations
+      # Instalar Cloud SQL Proxy manualmente
+      - name: Install Cloud SQL Proxy
         run: |
-          echo '${{ secrets.GCP_SA_KEY }}' > /tmp/google-cloud-key.json
-          docker run --network="host" \
-            -v /tmp:/tmp \
-            -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json \
-            -e CLOUD_SQL_CONNECTION_NAME=${{ env.CLOUD_SQL_INSTANCE }} \
-            -e DJANGO_SETTINGS_MODULE=monitoring.settings_prod \
-            gcr.io/cloudsql-docker/cloud-sql-proxy:1.33 \
-            /cloud_sql_proxy -instances=${{ env.CLOUD_SQL_INSTANCE }}=tcp:5432 & \
-            sleep 10 && \
-            pip install -r requirements.txt && \
-            python manage.py migrate
+          # Descargar el proxy
+          wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.7.0/cloud-sql-proxy.linux.amd64 -O cloud-sql-proxy
+          # Hacerlo ejecutable
+          chmod +x cloud-sql-proxy
+          # Crear archivo de credenciales
+          echo '${{ secrets.GCP_SA_KEY }}' > sa-key.json
+          # Iniciar el proxy en segundo plano
+          ./cloud-sql-proxy --credentials-file=sa-key.json arquisoft-453601:${{ env.REGION }}:django-db-instance &
+          # Esperar a que el proxy inicie
+          sleep 10
 
+      # Instalar dependencias de Python
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Verificar que el proxy está funcionando
+      - name: Check if proxy is running
+        run: |
+          netstat -tuln | grep 5432
+
+      # Aplicar migraciones
+      - name: Apply migrations
+        env:
+          DJANGO_SETTINGS_MODULE: monitoring.settings_prod
+        run: |
+          python manage.py migrate
