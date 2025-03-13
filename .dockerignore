@@ -8,5 +8,3 @@ __pycache__/
 media/
 staticfiles/
 .DS_Store
-
-keys.json
