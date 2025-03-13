@@ -56,3 +56,14 @@ jobs:
           --region ${{ env.REGION }} \
           --allow-unauthenticated \
           --set-env-vars="DJANGO_SETTINGS_MODULE=monitoring.settings_prod"
+
+    - id: 'sql-proxy'
+      uses: 'google-github-actions/sql-proxy@v1'
+      with:
+        instance: 'arquisoft-453601:us-central1:django-db-instance'
+        port: 5432
+
+    # Aplicar migraciones
+    - name: 'Apply Django migrations'
+      run: |
+        python manage.py migrate --settings=tu_proyecto.settings_prod

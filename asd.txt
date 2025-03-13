@@ -1,0 +1,30 @@
+# Crear instancia de PostgreSQL
+gcloud sql instances create django-db-instance \
+  --database-version=POSTGRES_13 \
+  --tier=db-f1-micro \
+  --region=us-central1 \
+  --root-password="Arquisoft esta una chimba de materia 5758"
+
+# Crear base de datos
+gcloud sql databases create django_db --instance=django-db-instance
+
+# Crear usuario para la aplicación
+gcloud sql users create django_user \
+  --instance=django-db-instance \
+  --password="esta es la contra del usuario de django debe ser bien segura, cuidado la rotan ajajaja"
+
+# Crear secretos para la base de datos
+gcloud secrets create db-name --replication-policy="automatic"
+echo -n "django_db" | gcloud secrets versions add db-name --data-file=-
+
+gcloud secrets create db-user --replication-policy="automatic"
+echo -n "django_user" | gcloud secrets versions add db-user --data-file=-
+
+gcloud secrets create db-password --replication-policy="automatic"
+echo -n "esta es la contra del usuario de django debe ser bien segura, cuidado la rotan ajajaja" | gcloud secrets versions add db-password --data-file=-
+
+gcloud secrets create db-host --replication-policy="automatic"
+echo -n "127.0.0.1" | gcloud secrets versions add db-host --data-file=-
+
+gcloud secrets create db-instance --replication-policy="automatic"
+echo -n "arquisoft-453601:us-central1:django-db-instance" | gcloud secrets versions add db-instance --data-file=-

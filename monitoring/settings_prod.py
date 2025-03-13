@@ -23,14 +23,23 @@ SECRET_KEY = access_secret_version("django-secret-key") or SECRET_KEY
 # Permitir hosts de Cloud Run
 ALLOWED_HOSTS = ['*']
 
-# Configuración de base de datos para desarrollo/pruebas
-# Esto es temporal hasta que configures Cloud SQL
+# Configuración de PostgreSQL para Cloud SQL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': access_secret_version("db-name"),
+        'USER': access_secret_version("db-user"),
+        'PASSWORD': access_secret_version("db-password"),
+        'HOST': access_secret_version("db-host"),
+        'PORT': '5432',
     }
 }
+
+# Para conexiones a través de unix socket en Cloud Run
+if os.environ.get('GAE_APPLICATION'):
+    # Si estamos en GCP, usamos socket
+    DATABASES['default']['HOST'] = f"/cloudsql/{access_secret_version('db-instance')}"
+    DATABASES['default']['PORT'] = ''
 
 # Configuración para WhiteNoise
 MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware'] + MIDDLEWARE
