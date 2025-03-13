@@ -13,7 +13,3 @@ DJANGO_SETTINGS_MODULE=monitoring.settings_prod python manage.py makemigrations
 echo "Ejecutando migrate..."
 # Ejecutar migraciones
 DJANGO_SETTINGS_MODULE=monitoring.settings_prod python manage.py migrate
-
-# Detener el proxy cuando terminemos
-kill $PROXY_PID
-echo "Proxy detenido."
