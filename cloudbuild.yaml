@@ -1,11 +1,11 @@
 steps:
   # Construir la imagen de Docker
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${REVISION_ID}', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${COMMIT_SHA}', '.']
 
   # Enviar la imagen a Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${REVISION_ID}']
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${COMMIT_SHA}']
 
   # Desplegar en Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -14,7 +14,7 @@ steps:
       - 'run'
       - 'deploy'
       - '${_SERVICE_NAME}'
-      - '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${REVISION_ID}'
+      - '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/${_SERVICE_NAME}:${COMMIT_SHA}'
       - '--region=${_REGION}'
       - '--platform=managed'
       - '--allow-unauthenticated'
