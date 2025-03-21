@@ -128,9 +128,6 @@ resources:
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/<id-proyecto>/global/networks/default
       networkIP: 10.128.0.52
-      accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
     tags:
       items: 
       - cbd-monitoring-db
@@ -164,9 +161,6 @@ resources:
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/<id-proyecto>/global/networks/default
       networkIP: 10.128.0.53
-      accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
     tags:
       items: 
       - cbd-services-firewall
@@ -198,9 +192,6 @@ resources:
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/<id-proyecto>/global/networks/default
       networkIP: 10.128.0.54
-      accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
     tags:
       items: 
       - cbd-services-firewall
@@ -232,9 +223,6 @@ resources:
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/<id-proyecto>/global/networks/default
       networkIP: 10.128.0.55
-      accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
     tags:
       items: 
       - cbd-services-firewall
@@ -267,9 +255,6 @@ resources:
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/<id-proyecto>/global/networks/default
       networkIP: 10.128.0.56
-      accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
     tags:
       items: 
       - cbd-services-firewall
