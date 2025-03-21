@@ -10,7 +10,10 @@
 #    - cbd-circuit-breaker
 #    - cbd-circuit-breaker-admin
 #    - cbd-monitoring-db
-# 2. Instancias MVs:
+# 2. Router y NAT:
+#    - cbd-router
+#    - cbd-nat
+# 3. Instancias MVs:
 #    - cbd-kong-instance
 #    - cbd-db-instance (postgreSQL instalado y configurado)
 #    - cbd-alarms-app-(a-c) (Monitoring app instalada)
