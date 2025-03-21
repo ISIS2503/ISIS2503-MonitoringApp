@@ -89,6 +89,19 @@ resources:
       ports: 
       - 5432
 
+
+# Router y NAT
+- name: cbd-router
+  type: compute.v1.router
+  properties:
+    region: us-central1
+    network: https://www.googleapis.com/compute/v1/projects/<id-proyecto>/global/networks/default
+    nats:
+    - name: cbd-nat
+      natIpAllocateOption: AUTO_ONLY
+      sourceSubnetworkIpRangesToNat: ALL_SUBNETWORKS_ALL_IP_RANGES
+
+
 # Kong instance
 - type: compute.v1.instance
   name: cbd-kong-instance
