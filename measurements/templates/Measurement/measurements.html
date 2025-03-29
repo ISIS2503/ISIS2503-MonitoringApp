@@ -24,6 +24,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr style="color:#0E2EB0">
+                            <th font color="red">ID Variable</th>
                             <th font color="red">Variable</th>
                             <th>Value</th>
                             <th>Unit</th>
@@ -35,6 +36,7 @@
 
                         {% for measurement in measurement_list %}
                         <tr>
+                            <td>{{ measurement.variable.id }}</td>
                             <td>{{ measurement.variable.name }}</td>
                             <td>{{ measurement.value }}</td>
                             <td>{{ measurement.unit }}</td>
