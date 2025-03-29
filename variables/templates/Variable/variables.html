@@ -25,6 +25,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr style="color:#0E2EB0">
+                            <th>ID</th>
                             <th>Variable</th>
                         </tr>
                         </thead>
@@ -32,6 +33,7 @@
 
                         {% for variable in variable_list %}
                         <tr>
+                            <td>{{ variable.id }}</td>
                             <td>{{ variable.name }}</td>
                         </tr>
                         {% endfor %}
