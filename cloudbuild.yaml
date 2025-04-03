@@ -19,7 +19,7 @@ steps:
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--add-cloudsql-instances=${PROJECT_ID}:${_REGION}:django-db-instance'
-      - '--set-env-vars=DJANGO_SETTINGS_MODULE=monitoring.settings_prod'
+      - '--set-env-vars=DJANGO_SETTINGS_MODULE=medical_system.settings_prod'
 
 substitutions:
   _SERVICE_NAME: app-medica

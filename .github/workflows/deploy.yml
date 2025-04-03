@@ -60,7 +60,7 @@ jobs:
       # Aplicar migraciones
       - name: Make and apply migrations
         env:
-          DJANGO_SETTINGS_MODULE: monitoring.settings_prod
+          DJANGO_SETTINGS_MODULE: medical_system.settings_prod
         run: |
           chmod +x scripts/run_migrations.sh 
           ./scripts/run_migrations.sh

@@ -35,4 +35,4 @@ RUN python manage.py collectstatic --noinput || true
 EXPOSE 8080
 
 # Comando para iniciar la aplicación
-CMD exec gunicorn --bind :$PORT --workers 2 --threads 8 --timeout 0 monitoring.wsgi:application
+CMD exec gunicorn --bind :$PORT --workers 2 --threads 8 --timeout 0 medical_system.wsgi:application
