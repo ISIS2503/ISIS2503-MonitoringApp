@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+    <h4>Cronogramas de Matrículas</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Grado</th>
+            <th>Curso</th>
+            <th>Costo</th>
+            <th>Fecha de Causación</th>
+            <th>Tipo de Pago</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cronograma in cronogramas %}
+        <tr>
+            <td>{{ cronograma.codigo }}</td>
+            <td>{{ cronograma.grado }}</td>  
+            <td>{{ cronograma.curso }}</td>
+            <td>{{ cronograma.costo }}</td>
+            <td>{{ cronograma.fecha_causacion }}</td>
+            <td>{{ cronograma.tipo_pago }}</td>
+        </tr>
+        {% endfor %}
+        <p>Total de cronogramas: {{ cronogramas|length }}</p>
+        </tbody>
+    </table>
+    <a href="{% url 'cronograma_create' %}" class="btn btn-success">Agregar Cronograma</a>
+</div>
+{% endblock %}

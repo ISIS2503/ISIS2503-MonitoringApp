@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+    <h4>Cronogramas de Matrículas</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Grado</th>
+            <th>Curso</th>
+            <th>Costo</th>
+            <th>Fecha de Causación</th>
+            <th>Tipo de Pago</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cronograma in cronogramas %}
+        <tr>
+            <td>{{ cronograma.codigo }}</td>
+            <td>{{ cronograma.grado|join:", " }}</td>  <!-- Asumiendo que grado es una lista -->
+            <td>{{ cronograma.curso.nombre }}</td>
+            <td>{{ cronograma.costo }}</td>
+            <td>{{ cronograma.fecha_causacion }}</td>
+            <td>{{ cronograma.tipo_pago }}</td>
+            <td>
+                <a href="{% url 'cronograma_delete' cronograma.id %}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'cronograma_create' %}" class="btn btn-success">Agregar Cronograma</a>
+</div>
+{% endblock %}

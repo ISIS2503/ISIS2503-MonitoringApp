@@ -1,0 +1,31 @@
+_format_version: "2.1"
+
+services:
+  - name: estudiantes_service
+    host: estudiantes_upstream
+    protocol: http
+    routes:
+      - name: estudiantes
+        paths:
+          - /estudiantes
+        strip_path: false
+
+  - name: matriculas_service
+    host: matriculas_upstream
+    protocol: http
+    routes:
+      - name: matriculas
+        paths:
+          - /matriculas
+        strip_path: false
+    
+upstreams:
+  - name: estudiantes_upstream
+    targets:
+      - target: 10.128.0.84:8080
+        weight: 100
+
+  - name: matriculas_upstream
+    targets:
+      - target: 10.128.0.85:8080
+        weight: 100
