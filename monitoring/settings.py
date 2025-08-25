@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'svm_)tpa-o^gkn@81sel&lapq2jc7^^-n9c+4y&f9rymz$kum_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'measurements',
     'variables',
+    'acompanantes',
+    'citas',
+    'estudiantesEstrella',
+    'psicologos',
+    'social_django',
+
 ]
 
 MIDDLEWARE = [
@@ -78,11 +84,11 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'name_db',
-        'USER': 'user_db',
-        'PASSWORD': 'user_password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'dato',
+        'USER': 'admi',
+        'PASSWORD': 'grupo2',
+        'HOST': '174.24.41.140',
+        'PORT': '5432',
     }
 }
 
@@ -133,3 +139,25 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+LOGIN_URL ="/login/auth0"
+LOGIN_REDIRECT_URL="/"
+LOGOUT_REDIRECT_URL="https://isis2503-juancamiloeduardo.us.auth0.com/v2/logout?returnTo=http%3A%2F%2F54.146.247.158:8000"
+
+SOCIAL_AUTH_TRAILING_SLASH=False
+SOCIAL_AUTH_AUTH0_DOMAIN='isis2503-juancamiloeduardo.us.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY='BpXJ2yDYznOGXwLNws2Jnrx0yL2FNIEv'
+SOCIAL_AUTH_AUTH0_SECRET='tnFJV6sto5DBbff8QWad_PnBj2IYAq26zmmONTNxfz8C-vWQHpcBzQmDCESqvRPu'
+
+SOCIAL_AUTH_AUTH0_SCOPE= [
+'openid'
+'profile'
+'email'
+'role'
+]
+AUTHENTICATION_BAKENDS={
+'monitoring.auth0backend.Auth0',
+'django.contrib.auth.bakends.ModelBackend',
+}
+
+
