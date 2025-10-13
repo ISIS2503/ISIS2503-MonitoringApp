@@ -277,6 +277,64 @@ resource "aws_instance" "monitoring" {
 
   depends_on = [aws_instance.database]
 }
+# ────────────────────────────────────────────────────────────
+# NUEVAS INSTANCIAS: monitoring_b y monitoring_c
+# ────────────────────────────────────────────────────────────
+
+resource "aws_instance" "monitoring_b" {
+  ami                         = data.aws_ami.ubuntu.id            # ← usa el mismo data source que tu instancia existente
+  instance_type               = "t2.nano"                          # ← igual que la original
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.traffic_django.id]  # ← mismo SG que expone 8080/HTTP
+
+  tags = {
+    Name = "cbd-monitoring-b"
+  }
+
+  user_data = <<-EOF
+    #!/bin/bash
+    export DATABASE_HOST=${aws_instance.db.private_ip}   # ← misma DB que usas hoy
+    apt-get update -y
+    apt-get install -y python3-pip git
+    mkdir -p /labs
+    cd /labs
+    # Clonar el repo de la app de monitoreo (rama del laboratorio)
+    git clone https://github.com/ISIS2503/ISIS2503-MonitoringApp
+    cd ISIS2503-MonitoringApp
+    git checkout Circuit-Breaker
+    pip3 install -r requirements.txt
+    python3 manage.py migrate
+    # Levantar en 0.0.0.0:8080
+    nohup python3 manage.py runserver 0.0.0.0:8080 &
+  EOF
+}
+
+resource "aws_instance" "monitoring_c" {
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = "t2.nano"
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.traffic_django.id]
+
+  tags = {
+    Name = "cbd-monitoring-c"
+  }
+
+  user_data = <<-EOF
+    #!/bin/bash
+    export DATABASE_HOST=${aws_instance.db.private_ip}
+    apt-get update -y
+    apt-get install -y python3-pip git
+    mkdir -p /labs
+    cd /labs
+    git clone https://github.com/ISIS2503/ISIS2503-MonitoringApp
+    cd ISIS2503-MonitoringApp
+    git checkout Circuit-Breaker
+    pip3 install -r requirements.txt
+    python3 manage.py migrate
+    nohup python3 manage.py runserver 0.0.0.0:8080 &
+  EOF
+}
+
 
 # Salida. Muestra la dirección IP pública de la instancia de Kong (Circuit Breaker).
 output "kong_public_ip" {
